@@ -1,6 +1,6 @@
 package com.asaas.mini.utils
 
-abstract class BaseEntityUser extends BaseEntity {
+abstract class BaseEntityPersonInfo extends BaseEntity {
 
     String name
     String email
