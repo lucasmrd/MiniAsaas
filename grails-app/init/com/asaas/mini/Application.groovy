@@ -1,4 +1,4 @@
-package com.mini
+package com.asaas.mini
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

@@ -1,4 +1,4 @@
-package com.mini
+package com.asaas.mini
 
 class BootStrap {
 
