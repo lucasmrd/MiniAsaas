@@ -4,9 +4,10 @@
             <atlas-col lg="6">
                 <atlas-input
                     label="Nome"
+                    name="name"
                     id="name"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Digite seu nome"
                     required
                 ></atlas-input>
             </atlas-col>
@@ -14,8 +15,9 @@
                 <atlas-masked-input
                     mask-alias="email"
                     label="E-mail"
-                    id="email"                                    
-                    placeholder="john.doe@example.com"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
                     required
                 ></atlas-masked-input>         
             </atlas-col>
@@ -24,7 +26,7 @@
                     mask-alias="cpf-cnpj"
                     label="CPF/CNPJ"
                     id="cpfCnpj"
-                    placeholder="123.456.789-00"
+                    name="cpfCnpj"
                     required
                 ></atlas-masked-input>
             </atlas-col>
@@ -32,15 +34,16 @@
                 <atlas-masked-input
                     mask-alias="cellphone"
                     label="Telefone"
-                    id="phone"
+                    name="mobilePhone"
+                    id="mobilePhone"
                     mask="(99) 99999-9999"
-                    placeholder="(11) 91234-5678"
                     required
                 ></atlas-masked-input>
             </atlas-col>
             <atlas-col lg="4">
                 <atlas-masked-input
                     label="Data de Nascimento"
+                    name="birthDate"
                     id="birthDate"
                     type="date"
                     required

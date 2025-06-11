@@ -8,7 +8,7 @@
     <atlas-form-panel 
         class="js-create-customer-form" 
         editing 
-        action="${createLink(controller: 'customer', action: 'saveCustomer')}" 
+        action="${createLink(controller: 'customer', action: 'save')}" 
         method="post"
         header="Criar Conta"
     >
