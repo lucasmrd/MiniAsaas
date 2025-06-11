@@ -8,7 +8,7 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>    
     <asset:link rel="icon" href="asaas.png" type="image/x-ico"/>
-    <link defer rel="stylesheet" href="https://atlas.asaas.com/v26.2.0/atlas.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://atlas.asaas.com/v26.2.0/atlas.css" crossorigin="anonymous">
     <script defer src="https://atlas.asaas.com/v26.2.0/atlas.js" crossorigin="anonymous"></script>
     <g:layoutHead/>
 </head>
