@@ -1,14 +1,15 @@
 package com.asaas.mini.utils
 
-import java.time.LocalDate
-
 abstract class BaseEntityPersonInfo extends BaseEntity {
 
     String name
     String email
     String cpfCnpj
     String mobilePhone
-    LocalDate birthDate
+    String phone
+    Date birthDate
+    Date companyCreationDate
+    String companyName
     String postalCode
     String address
     String addressNumber
@@ -18,9 +19,12 @@ abstract class BaseEntityPersonInfo extends BaseEntity {
     
     static constraints = {
         name nullable: false, blank: false, maxSize: 255
+        companyName nullable: true, blank: true, maxSize: 255
         email nullable: false, blank: false, email: true, maxSize: 255
+        phone nullable: true, blank: true, maxSize: 15
         mobilePhone nullable: false, blank: false, maxSize:15
         birthDate nullable: false, blank: false
+        companyCreationDate nullable: true, blank: true
         cpfCnpj nullable: false, blank: false, maxSize: 20
         postalCode nullable: true, blank: true, maxSize: 10
         address nullable: true, blank: true, maxSize: 255

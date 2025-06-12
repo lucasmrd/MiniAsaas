@@ -21,7 +21,7 @@
                     required
                 ></atlas-masked-input>         
             </atlas-col>
-            <atlas-col lg="4">
+            <atlas-col lg="3">
                 <atlas-masked-input
                     mask-alias="cpf-cnpj"
                     label="CPF/CNPJ"
@@ -30,24 +30,34 @@
                     required
                 ></atlas-masked-input>
             </atlas-col>
-            <atlas-col lg="4">
+            <atlas-col lg="3">
+                <atlas-masked-input
+                    mask-alias="phone"
+                    label="Telefone"
+                    name="phone"
+                    id="phone"
+                    mask="(99) 99999-9999"
+                    required
+                ></atlas-masked-input>
+            </atlas-col>
+            <atlas-col lg="3">
                 <atlas-masked-input
                     mask-alias="cellphone"
-                    label="Telefone"
+                    label="Celular"
                     name="mobilePhone"
                     id="mobilePhone"
                     mask="(99) 99999-9999"
                     required
                 ></atlas-masked-input>
             </atlas-col>
-            <atlas-col lg="4">
-                <atlas-masked-input
+            <atlas-col lg="3">
+                <atlas-date-picker
                     label="Data de Nascimento"
                     name="birthDate"
                     id="birthDate"
-                    type="date"
+                    prevent-later-date
                     required
-                ></atlas-masked-input>
+                ></atlas-date-picker>
             </atlas-col>
         </atlas-row>
     </atlas-grid>

@@ -17,7 +17,7 @@
                     name="address"
                     id="address"
                     type="text"
-                    placeholder="Rua Exemplo"
+                    placeholder="Rua"
                     required
                 >
                 </atlas-input>
@@ -29,7 +29,7 @@
                     class="js-address-complement-input"
                     id="addressComplement"
                     type="text"
-                    placeholder="Bairro Exemplo"
+                    placeholder="Bairro"
                     required
                 >
                 </atlas-input>
@@ -52,17 +52,18 @@
                     class="js-city-input"
                     id="city"
                     type="text"
-                    placeholder="Campo Grande"
+                    placeholder="Cidade"
                     required
                 >
                 </atlas-input>
             </atlas-col>
             <atlas-col lg="6">
                 <atlas-select
-                    class="js-state-input"
+                    class="js-state-select"
                     id="stateSelect"
                     name="state"
                     label="Estado"
+                    placeholder="Selecione um estado"
                     search-on-render
                     value-key="sigla"
                     label-key="nome"
