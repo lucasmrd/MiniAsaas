@@ -4,6 +4,7 @@ import com.asaas.mini.Customer
 
 public class CustomerController {
     def customerService
+
     def index() { }
 
     def save() {        
