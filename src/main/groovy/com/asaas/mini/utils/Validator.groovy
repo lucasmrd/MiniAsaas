@@ -131,9 +131,6 @@ public class Validator {
     public static Boolean isValidCompanyCreationDate(Date companyCreationDate) {
         if (!companyCreationDate) return false
 
-        Date limitDate = DateUtil.fromString("01/01/1900")
-        if (companyCreationDate.before(limitDate)) return false
-
         Date today = new Date()
         if (companyCreationDate.after(today)) return false
 
