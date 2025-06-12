@@ -3,7 +3,7 @@ function CreateCustomerController(reference) {
     const addressInput = reference.querySelector('.js-address-input');
     const addressComplementInput = reference.querySelector('.js-address-complement-input');
     const cityInput = reference.querySelector('.js-city-input');
-    const stateInput = reference.querySelector('.js-state-input');
+    const stateInput = reference.querySelector('.js-state-select');
 
     const init = function() {
         bindPostalCodeInput();
