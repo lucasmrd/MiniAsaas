@@ -1,6 +1,6 @@
 package com.asaas.mini
 
-import com.asaas.mini.Customer
+import com.asaas.mini.CustomerService
 
 public class CustomerController {
     def customerService
