@@ -21,7 +21,9 @@ public class Validator {
 
     public static Boolean isValidCpf(String cpf) {
         if (!cpf) return false
-        
+
+        cpf.replaceAll("\\D", "")
+
         if (cpf.matches("\\d{11}")) return false
         if (cpf == cpf[0] * 11) return false
 
@@ -49,6 +51,8 @@ public class Validator {
 
     public static Boolean isValidCnpj(String cnpj) {
         if (!cnpj) return false
+
+        cnpj.replaceAll("\\D", "")
 
         if (cnpj.length() != 14) return false
         
@@ -86,6 +90,8 @@ public class Validator {
     public static Boolean isValidPhone(String phone) {
         if (!phone) return false
 
+        phone.replaceAll("\\D", "")
+
         if (!phone.matches(/\d{2}[2-5]\d{7}/)) return false
 
         if (phone.size() < 10 || phone.size() > 11) return false
@@ -95,6 +101,8 @@ public class Validator {
 
     public static Boolean isValidMobilePhone(String mobilePhone) {
         if (!mobilePhone) return false
+
+        mobilePhone.replaceAll("\\D", "")
 
         if (mobilePhone.size() != 11) return false
 
@@ -129,6 +137,8 @@ public class Validator {
 
     public static Boolean isValidPostalCode(String postalCode) {
         if (!postalCode) return false
+
+        postalCode.replaceAll("\\D", "")
 
         if (!postalCode.matches("\\d{8}")) return false
 
