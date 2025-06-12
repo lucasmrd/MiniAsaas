@@ -21,8 +21,10 @@ public class Validator {
 
     public static Boolean isValidCpf(String cpf) {
         if (!cpf) return false
-        
-        if (cpf.matches("\\d{11}")) return false
+
+        cpf = cpf.replaceAll("\\D", "")
+
+        if (!cpf.matches("\\d{11}")) return false
         if (cpf == cpf[0] * 11) return false
 
         def sum = 0
@@ -49,6 +51,8 @@ public class Validator {
 
     public static Boolean isValidCnpj(String cnpj) {
         if (!cnpj) return false
+
+        cnpj = cnpj.replaceAll("\\D", "")
 
         if (cnpj.length() != 14) return false
         
@@ -86,6 +90,8 @@ public class Validator {
     public static Boolean isValidPhone(String phone) {
         if (!phone) return false
 
+        phone = phone.replaceAll("\\D", "")
+
         if (!phone.matches(/\d{2}[2-5]\d{7}/)) return false
 
         if (phone.size() < 10 || phone.size() > 11) return false
@@ -95,6 +101,8 @@ public class Validator {
 
     public static Boolean isValidMobilePhone(String mobilePhone) {
         if (!mobilePhone) return false
+
+        mobilePhone = mobilePhone.replaceAll("\\D", "")
 
         if (mobilePhone.size() != 11) return false
 
@@ -106,12 +114,16 @@ public class Validator {
     public static Boolean isValidBirthDate(Date birthDate) {
         if (!birthDate) return false
 
-        if (birthDate < new Date("1900-01-01")) return false        
+        Date limitDate = DateUtil.fromString("01/01/1900")
+        if (birthDate.before(limitDate)) return false
 
         Date today = new Date()
         if (birthDate.after(today)) return false
 
-        if (birthDate > today - 18 * 365) return false
+        Calendar cal = Calendar.getInstance()
+        cal.time = today
+        cal.add(Calendar.YEAR, -18)
+        if (birthDate.after(cal.time)) return false
 
         return true
     }
@@ -119,7 +131,8 @@ public class Validator {
     public static Boolean isValidCompanyCreationDate(Date companyCreationDate) {
         if (!companyCreationDate) return false
 
-        if (companyCreationDate < new Date("1900-01-01")) return false
+        Date limitDate = DateUtil.fromString("01/01/1900")
+        if (companyCreationDate.before(limitDate)) return false
 
         Date today = new Date()
         if (companyCreationDate.after(today)) return false
@@ -129,6 +142,8 @@ public class Validator {
 
     public static Boolean isValidPostalCode(String postalCode) {
         if (!postalCode) return false
+
+        postalCode = postalCode.replaceAll("\\D", "")
 
         if (!postalCode.matches("\\d{8}")) return false
 
