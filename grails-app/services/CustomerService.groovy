@@ -31,8 +31,10 @@ public class CustomerService {
         customer.addressComplement = parsedParams.addressComplement
         customer.city = parsedParams.city
         customer.state = parsedParams.state
-        
-        return customer.save(flush: true, failOnError: true)
+
+        customer.save(flush: true, failOnError: true)
+
+        return customer
     }
     
     private Customer validateCustomer(Map parsedParams) {
