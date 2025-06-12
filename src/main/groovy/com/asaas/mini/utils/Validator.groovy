@@ -54,27 +54,27 @@ public class Validator {
         
         if (cnpj == cnpj[0] * 14) return false
 
-        def pesos1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-        def pesos2 = [6] + pesos1 
+        def firstWeights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+        def secondWeights = [6] + firstWeights
         
-        def soma1 = 0
+        def firstSum = 0
         for (int i = 0; i < 12; i++) {
-            soma1 += cnpj[i].toInteger() * pesos1[i]
+            firstSum += cnpj[i].toInteger() * firstWeights[i]
         }
 
-        def digito1 = soma1 % 11
-        digito1 = (digito1 < 2) ? 0 : 11 - digito1
+        def firstDigit = firstSum % 11
+        firstDigit = (firstDigit < 2) ? 0 : 11 - firstDigit
 
-        if (cnpj[12].toInteger() != digito1) return false
+        if (cnpj[12].toInteger() != firstDigit) return false
 
-        def soma2 = 0
+        def secondSum = 0
         for (int i = 0; i < 13; i++) {
-            soma2 += cnpj[i].toInteger() * pesos2[i]
+            secondSum += cnpj[i].toInteger() * secondWeights[i]
         }
-        def digito2 = soma2 % 11
-        digito2 = (digito2 < 2) ? 0 : 11 - digito2
+        def secondDigit = secondSum % 11
+        secondDigit = (secondDigit < 2) ? 0 : 11 - secondDigit
 
-        if (cnpj[13].toInteger() != digito2) return false
+        if (cnpj[13].toInteger() != secondDigit) return false
 
         return true
     }
