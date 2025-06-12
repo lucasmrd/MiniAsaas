@@ -112,7 +112,7 @@ environments:
             dbCreate: update
             url: jdbc:mysql://localhost:3306/miniasaas
             username: root
-            password: password
+            password: Mini@saas123
     test:
         dataSource:
             dbCreate: update
