@@ -12,11 +12,31 @@ public class Validator {
     public static final String EMAIL_REGEX = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
 
     public static Boolean isValidName(String name) {
-        return name != null && !name.trim().isEmpty() && name.length() <= 100
+        if (!name?.trim()) return false
+
+        name = name.trim().replaceAll(/\s+/, ' ')
+
+        if (name.length() < 5 || name.length() > 100) return false
+
+        if (!name.contains(' ')) return false
+
+        if (!(name ==~ /^[\p{L}\p{M}'\- ]+$/)) return false
+
+        return true
     }
 
     public static Boolean isValidEmail(String email) {
-        return email != null && email.matches(EMAIL_REGEX)
+        if (!email?.trim()) return false
+        email = email.trim().toLowerCase()
+
+        if (email.length() > 254)  return false
+
+        def parts = email.split('@')
+        if (parts.size() != 2 || parts[0].size() > 64) return false
+
+        if (!email.matches(EMAIL_REGEX)) return false
+
+        return true
     }
 
     public static Boolean isValidCpf(String cpf) {
