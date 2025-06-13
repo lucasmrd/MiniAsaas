@@ -13,6 +13,7 @@
         header="Criar Conta"
     >
         <g:render template="/customer/templates/index/infoSection" />
+        <g:render template="/customer/templates/index/contactSection" />
         <g:render template="/customer/templates/index/addressSection" />
     </atlas-form-panel>
     <asset:javascript src="customer/CreateCustomerController.js" />
