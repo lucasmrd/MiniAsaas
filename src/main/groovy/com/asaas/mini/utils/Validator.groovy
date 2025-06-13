@@ -104,9 +104,7 @@ public class Validator {
 
         mobilePhone = mobilePhone.replaceAll("\\D", "")
 
-        if (mobilePhone.size() != 11) return false
-
-        if (!mobilePhone.matches("\\d{10,11}")) return false
+        if (!mobilePhone.matches("\\d{2}9\\d{8}")) return false
 
         return true
     }
