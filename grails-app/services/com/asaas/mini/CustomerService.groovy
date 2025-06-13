@@ -63,8 +63,12 @@ public class CustomerService {
             customer.errors.rejectValue("mobilePhone", null, "Telefone inválido!")
         }
 
-        if(!Validator.isValidBirthDate(parsedParams.birthDate)) {
+        if(!DateUtil.isValidBirthDate(parsedParams.birthDate)) {
             customer.errors.rejectValue("birthDate", null, "Data de nascimento inválida!")
+        }
+
+        if(!DateUtil.isValidCompanyCreationDate(parsedParams.companyCreationDate)) {
+            customer.errors.rejectValue("companyCreationDate", null, "Data de fundação inválida!")
         }
 
         if(!Validator.isValidPostalCode(parsedParams.postalCode)) {
@@ -81,7 +85,6 @@ public class CustomerService {
         sanitizedParams.phone = parseInfo.phone?.trim().replaceAll("\\D", "")
         sanitizedParams.mobilePhone = parseInfo.mobilePhone?.trim().replaceAll("\\D", "")
         sanitizedParams.cpfCnpj = parseInfo.cpfCnpj?.trim().replaceAll("\\D", "")
-        sanitizedParams.birthDate = DateUtil.fromString(parseInfo.birthDate)
         sanitizedParams.address = parseInfo.address?.trim()
         sanitizedParams.city = parseInfo.city?.trim()
         sanitizedParams.state = parseInfo.state?.trim()
