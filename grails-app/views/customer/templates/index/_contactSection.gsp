@@ -17,17 +17,15 @@
                     label="Telefone"
                     name="phone"
                     id="phone"
-                    mask="(99) 99999-9999"
                     required
                 ></atlas-masked-input>
             </atlas-col>
             <atlas-col lg="3">
                 <atlas-masked-input
-                    mask-alias="cellphone"
+                    mask-alias="cell-phone"
                     label="Celular"
                     name="mobilePhone"
                     id="mobilePhone"
-                    mask="(99) 99999-9999"
                     required
                 ></atlas-masked-input>
             </atlas-col>
