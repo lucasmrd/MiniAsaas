@@ -25,6 +25,18 @@ public class Validator {
         return true
     }
 
+    public static Boolean isValidCompanyName(String name) {
+        if (!name?.trim()) return false
+
+        name = name.trim().replaceAll(/\s+/, ' ')
+
+        if (name.length() < 2 || name.length() > 150) return false
+
+        if (!(name ==~ /^[\p{L}\p{M}'\- ]+$/)) return false
+
+        return true
+    }
+
     public static Boolean isValidEmail(String email) {
         if (!email?.trim()) return false
         email = email.trim().toLowerCase()
