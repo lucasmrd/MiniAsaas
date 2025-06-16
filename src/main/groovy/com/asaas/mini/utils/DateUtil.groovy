@@ -14,10 +14,9 @@ public class DateUtil {
         }
     }
 
-    public static Boolean isValidBirthDate(String birthDate) {
-        birthDate = fromString(birthDate)
+    public static Boolean isValidBirthDate(Date birthDate) {
 
-        int minDate = 16
+        int minAge = 16
 
         if (!birthDate) return false
 
@@ -42,7 +41,7 @@ public class DateUtil {
 
         if (currentMonth < birthMonth || (currentMonth == birthMonth && currentDay < birthDay)) age--
 
-        if (!(age >= minDate)) return false
+        if (!(age >= minAge)) return false
 
         return true
     }
