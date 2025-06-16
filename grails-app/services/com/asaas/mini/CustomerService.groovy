@@ -3,6 +3,8 @@ package com.asaas.mini
 import com.asaas.mini.Customer
 import com.asaas.mini.utils.Validator
 import com.asaas.mini.utils.DateUtil
+import com.asaas.mini.enums.PersonType
+import com.asaas.mini.enums.CompanyType
 
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
@@ -12,7 +14,10 @@ public class CustomerService {
 
     public Customer save(Map parseInfo) {
 
+        println "Parsed Info: ${parseInfo}"
+        println "person type: typeof ${parseInfo.personType}"
         Map parsedParams = sanitizeParams(parseInfo)
+        println "Parsed Params: ${parsedParams}"
         Customer validatedCustomer = validateCustomer(parsedParams)
 
         if (validatedCustomer.hasErrors()) {
@@ -20,10 +25,12 @@ public class CustomerService {
         }
 
         Customer customer = new Customer()
+        customer.personType = parsedParams.personType
         customer.name = parsedParams.name
         customer.companyName = parsedParams.companyName
         customer.email = parsedParams.email
         customer.cpfCnpj = parsedParams.cpfCnpj
+        customer.companyType = parsedParams.companyType
         customer.phone = parsedParams.phone
         customer.mobilePhone = parsedParams.mobilePhone
         customer.birthDate = parsedParams.birthDate
@@ -42,9 +49,21 @@ public class CustomerService {
 
     private Customer validateCustomer(Map parsedParams) {
         Customer customer = new Customer()
-        
-        if(!Validator.isValidName(parsedParams.name)) {
-            customer.errors.rejectValue("name", null, "Nome é obrigatório!")
+
+        if(parsedParams.personType.isNatural()) {
+            if(!Validator.isValidName(parsedParams.name)) {
+                customer.errors.rejectValue("name", null, "Nome inválido!")        
+            }
+            
+            if(!DateUtil.isValidBirthDate(parsedParams.birthDate)) {
+                customer.errors.rejectValue("birthDate", null, "Data de nascimento inválida!")
+            }
+        }
+
+        if(parsedParams.personType.isLegal()) {
+            if (!Validator.isValidCompanyName(parsedParams.companyName)) {
+                customer.errors.rejectValue("companyName", null, "Nome da Empresa inválida!")
+            }
         }
 
         if(!Validator.isValidEmail(parsedParams.email)) {
@@ -60,15 +79,7 @@ public class CustomerService {
         }
 
         if(!Validator.isValidMobilePhone(parsedParams.mobilePhone)) {
-            customer.errors.rejectValue("mobilePhone", null, "Telefone inválido!")
-        }
-
-        if(!DateUtil.isValidBirthDate(parsedParams.birthDate)) {
-            customer.errors.rejectValue("birthDate", null, "Data de nascimento inválida!")
-        }
-
-        if(!DateUtil.isValidCompanyCreationDate(parsedParams.companyCreationDate)) {
-            customer.errors.rejectValue("companyCreationDate", null, "Data de fundação inválida!")
+            customer.errors.rejectValue("mobilePhone", null, "Celular inválido!")
         }
 
         if(!Validator.isValidPostalCode(parsedParams.postalCode)) {
@@ -80,10 +91,14 @@ public class CustomerService {
 
     private static Map sanitizeParams(Map parseInfo) {
         Map sanitizedParams = [:]
+        sanitizedParams.personType = PersonType.convert(parseInfo.personType)
         sanitizedParams.name = parseInfo.name?.trim()
         sanitizedParams.email = parseInfo.email?.trim()
+        sanitizedParams.birthDate = DateUtil.fromString(parseInfo.birthDate)
         sanitizedParams.phone = parseInfo.phone?.trim().replaceAll("\\D", "")
         sanitizedParams.mobilePhone = parseInfo.mobilePhone?.trim().replaceAll("\\D", "")
+        sanitizedParams.companyName = parseInfo.companyName?.trim()
+        sanitizedParams.companyType = CompanyType.convert(parseInfo.companyType)
         sanitizedParams.cpfCnpj = parseInfo.cpfCnpj?.trim().replaceAll("\\D", "")
         sanitizedParams.address = parseInfo.address?.trim()
         sanitizedParams.city = parseInfo.city?.trim()
