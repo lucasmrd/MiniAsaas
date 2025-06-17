@@ -6,19 +6,19 @@ enum CompanyType {
     ASSOCIATION, INDIVIDUAL, LIMITED_COMPANY, PERSONAL_COMPANY
 
     public Boolean isAssociation() {
-        return [CompanyType.ASSOCIATION].contains(this)
+        return CompanyType.ASSOCIATION == this
     }
 
     public Boolean isIndividual() {
-        return [CompanyType.INDIVIDUAL].contains(this)
+        return CompanyType.INDIVIDUAL == this
     }
 
     public Boolean isLimitedCompany() {
-        return [CompanyType.LIMITED_COMPANY].contains(this)
+        return CompanyType.LIMITED_COMPANY == this
     }
 
     public Boolean isPersonalCompany() {
-        return [CompanyType.PERSONAL_COMPANY].contains(this)
+        return CompanyType.PERSONAL_COMPANY == this
     }
 
     public String getLabel() {
