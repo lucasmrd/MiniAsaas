@@ -1,0 +1,311 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+
+    <description>
+        Basic rule set.
+        These rules are intended to be broadly (if not universally) applicable.
+    </description>
+
+    <rule class='org.codenarc.rule.basic.AssertWithinFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.AssignmentInConditionalRule'/>
+    <rule class='org.codenarc.rule.basic.BigDecimalInstantiationRule'/>
+    <rule class='org.codenarc.rule.basic.BitwiseOperatorInConditionalRule'/>
+    <rule class='org.codenarc.rule.basic.BooleanGetBooleanRule'/>
+    <rule class='org.codenarc.rule.basic.BrokenNullCheckRule'/>
+    <rule class='org.codenarc.rule.basic.BrokenOddnessCheckRule'/>
+    <rule class='org.codenarc.rule.basic.ClassForNameRule'/>
+    <rule class='org.codenarc.rule.basic.ComparisonOfTwoConstantsRule'/>
+    <rule class='org.codenarc.rule.basic.ComparisonWithSelfRule'/>
+    <rule class='org.codenarc.rule.basic.ConstantAssertExpressionRule'/>
+    <rule class='org.codenarc.rule.basic.ConstantTernaryExpressionRule'/>
+    <rule class='org.codenarc.rule.basic.ConstantIfExpressionRule'/>
+    <rule class='org.codenarc.rule.basic.DeadCodeRule'/>
+    <rule class='org.codenarc.rule.basic.DoubleNegativeRule'/>
+    <rule class='org.codenarc.rule.basic.DuplicateCaseStatementRule'/>
+    <rule class='org.codenarc.rule.basic.DuplicateMapKeyRule'/>
+    <rule class='org.codenarc.rule.basic.DuplicateSetValueRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyCatchBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyClassRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyElseBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyForStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyIfStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptySwitchStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptySynchronizedStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyStaticInitializerRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyTryBlockRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyWhileStatementRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyInstanceInitializerRule'/>
+    <rule class='org.codenarc.rule.basic.EmptyMethodRule'>
+        <property name="doNotApplyToClassNames" value="*CacheService"/>
+    </rule>
+    <rule class='org.codenarc.rule.basic.EqualsAndHashCodeRule'/>
+    <rule class='org.codenarc.rule.basic.EqualsOverloadedRule'/>
+    <rule class='org.codenarc.rule.basic.ExplicitGarbageCollectionRule'/>
+    <rule class='org.codenarc.rule.basic.ForLoopShouldBeWhileLoopRule'/>
+    <rule class='org.codenarc.rule.basic.HardCodedWindowsFileSeparatorRule'/>
+    <rule class='org.codenarc.rule.basic.HardCodedWindowsRootDirectoryRule'/>
+    <rule class='org.codenarc.rule.basic.IntegerGetIntegerRule'/>
+    <rule class='org.codenarc.rule.basic.MultipleUnaryOperatorsRule'/>
+    <rule class='org.codenarc.rule.basic.RandomDoubleCoercedToZeroRule'/>
+    <rule class='org.codenarc.rule.basic.RemoveAllOnSelfRule'/>
+    <rule class='org.codenarc.rule.basic.ReturnFromFinallyBlockRule'/>
+    <rule class='org.codenarc.rule.basic.ThrowExceptionFromFinallyBlockRule'/>
+
+    <!-- Braces Rules -->
+    <rule class='org.codenarc.rule.braces.ElseBlockBracesRule'>
+        <property name='violationMessage' value='Todo IF/ELSE que contenha uma complexidade maior deverá utilizar chaves delimitando o escopo da condição e da execução conforme [Boas práticas: Quando utilizar chaves no IF ELSE](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#quando-utilizar-chaves-no-if-else).'/>
+    </rule>
+
+    <!-- Imports Rules -->
+    <rule class='org.codenarc.rule.imports.UnusedImportRule'/>
+    <rule class='org.codenarc.rule.imports.NoWildcardImportsRule'/>
+    <rule class='org.codenarc.rule.imports.UnnecessaryGroovyImportRule'/>
+    <rule class='org.codenarc.rule.imports.DuplicateImportRule'/>
+
+    <!-- Logging Rules -->
+    <rule class='org.codenarc.rule.logging.PrintlnRule'/>
+    <rule class='org.codenarc.rule.logging.PrintStackTraceRule'>
+        <property name='violationMessage' value='Todo printStackTrace() deve ser substituído por algo mais robusto conforme [Boas práticas: Logs](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#logs).'/>
+    </rule>
+
+    <!-- Convention Rules -->
+    <rule class='org.codenarc.rule.convention.ImplicitReturnStatementRule'/>
+    <rule class='org.codenarc.rule.convention.PublicMethodsBeforeNonPublicMethodsRule'>
+        <property name="doNotApplyToFilesMatching" value=".+/grails\\-app/domain/.+"></property>
+        <property name='violationMessage' value='Métodos públicos devem preceder métodos privados conforme [Boas Práticas: Ordenação dos métodos públicos e privados](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#ordenacao-metodos)'/>
+    </rule>
+    <rule class='org.codenarc.rule.convention.StaticFieldsBeforeInstanceFieldsRule'>
+        <property name="doNotApplyToFilesMatching" value=".+\/grails\-app\/(domain|jobs)\/.+"></property>
+    </rule>
+    <rule class='org.codenarc.rule.convention.NoDoubleRule'/>
+
+    <!-- Grails Rules -->
+    <rule class='org.codenarc.rule.grails.GrailsDomainWithServiceReferenceRule'>
+        <property name='violationMessage' value='Não utilizamos injeções de service em classes de domínio, porque existem implicações de performance conforme [Boas Práticas: Por que não utilizamos injeção de dependências nas classes de domínio?](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#por-que-n%C3%A3o-utilizamos-inje%C3%A7%C3%A3o-de-depend%C3%AAncias-nas-classes-de-dom%C3%ADnio-).'/>
+    </rule>
+    <rule class='org.codenarc.rule.grails.GrailsDuplicateConstraintRule'/>
+    <rule class='org.codenarc.rule.grails.GrailsMassAssignmentRule'>
+        <property name="violationMessage" value="Cuidado ao instanciar objetos diretamente com o input do usuário. Esta regra pode ser desconsiderada quando o objeto está indo para uma estrutura de transferência de dados (DTOs, Adapters) e ainda será validada."/>
+    </rule>
+
+    <!-- Formatting Rules -->
+    <rule class='org.codenarc.rule.formatting.BracesForIfElseRule'/>
+    <rule class='org.codenarc.rule.formatting.BlankLineBeforePackageRule'/>
+    <rule class='org.codenarc.rule.formatting.BlockEndsWithBlankLineRule'/>
+    <rule class='org.codenarc.rule.formatting.BlockStartsWithBlankLineRule'/>
+    <rule class='org.codenarc.rule.formatting.ClassStartsWithBlankLineRule'>
+        <property name="violationMessage" value="Classes e Enums devem conter uma linha em branco antes do cabeçalho"/>
+    </rule>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterCatchRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterCommaRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterForRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterIfRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterOpeningBraceRule'>
+        <property name="doNotApplyToClassNames" value="*CacheService"/>
+    </rule>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterClosingBraceRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceAfterSwitchRule'/>
+    <rule class='org.codenarc.rule.formatting.SpaceBeforeClosingBraceRule'>
+        <property name="doNotApplyToClassNames" value="*CacheService"/>
+    </rule>
+    <rule class='org.codenarc.rule.formatting.SpaceBeforeOpeningBraceRule'/>
+    <rule class='org.codenarc.rule.formatting.TrailingWhitespaceRule'/>
+    <rule class='org.codenarc.rule.formatting.ConsecutiveBlankLinesRule'/>
+
+    <!-- Groovyism Rules -->
+    <rule class='org.codenarc.rule.groovyism.ExplicitArrayListInstantiationRule'/>
+    <rule class='org.codenarc.rule.groovyism.GStringExpressionWithinStringRule'/>
+
+    <!-- Naming Rules -->
+    <rule class='org.codenarc.rule.naming.PackageNameRule'/>
+    <rule class='org.codenarc.rule.naming.FieldNameRule'>
+        <property name="doNotApplyToClassNames" value="*DTO"/>
+        <property name="violationMessage" value="Campos não-estáticos devem seguir o formato [`lowerCamelCase`](https://www.techtarget.com/whatis/definition/CamelCase), sem caracteres especiais, enquanto [constantes estáticas devem seguir nosso padrão](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#constants-patterns)."/>
+    </rule>
+    <rule class='org.codenarc.rule.naming.PropertyNameRule'>
+        <property name="doNotApplyToClassNames" value="*DTO"/>
+        <property name="violationMessage" value="Propriedades não-estáticas devem seguir o formato [`lowerCamelCase`](https://www.techtarget.com/whatis/definition/CamelCase), sem caracteres especiais, enquanto [constantes estáticas devem seguir nosso padrão](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#constants-patterns)."/>
+    </rule>
+
+    <!-- Unnecessary Rules -->
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDotClassRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessarySemicolonRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInFieldDeclarationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryDefInMethodDeclarationRule'/>
+    <rule class='org.codenarc.rule.unnecessary.UnnecessaryInstanceOfCheckRule'/>
+
+    <!-- Unused Rules -->
+    <rule class='org.codenarc.rule.unused.UnusedMethodParameterRule'>
+        <property name="doNotApplyToClassNames" value="*CacheService"/>
+    </rule>
+    <rule class='org.codenarc.rule.unused.UnusedObjectRule'/>
+    <rule class='org.codenarc.rule.unused.UnusedVariableRule'/>
+
+    <!-- Security Rules -->
+    <rule class='org.codenarc.rule.security.InsecureRandomRule'/>
+
+    <!-- Avoid public methods on BaseController -->
+    <rule class='org.codenarc.rule.generic.IllegalClassMemberRule'>
+        <property name='allowedMethodModifiers' value='private,protected' />
+        <property name='applyToClassNames' value='BaseController' />
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalClassMemberRule'>
+        <property name='name' value='NoStaticMethodsOnServices'/>
+        <property name='illegalMethodModifiers' value='static' />
+        <property name='applyToClassNames' value='*Service' />
+        <property name='violationMessage' value='Não utilize métodos estáticos em services, porque services já são singleton por padrão. [Saiba mais](https://grails.github.io/grails2-doc/2.5.x/guide/single.html#scopedServices).'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalClassReferenceRule'>
+        <property name='classNames' value='org.json.JSONArray,org.json.JSONObject'/>
+        <property name='violationMessage' value='Não use classes do `org.json` quando pode usar classes do `org.codehaus.groovy.grails.web.json`, pois isso pode acontecer: #10901'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalClassReferenceRule'>
+        <property name='name' value='IllegalUseOfCompileStatic'/>
+        <property name='classNames' value='groovy.transform.CompileStatic'/>
+        <property name='violationMessage' value='Não utilize a anotação `@CompileStatic` do Java. Substitua pela anotação `@GrailsCompileStatic` do Grails do pacote `grails.compiler.GrailsCompileStatic`.'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='ForceHttps'/>
+        <property name='regex' value='http:'/>
+        <property name='violationMessage' value='Para maior segurança na chamada utilize HTTPS'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='NoDirectThreads'/>
+        <property name='regex' value='\bThread\b'/>
+        <property name='violationMessage' value='Evite utilizar Threads, priorize o uso de tasks e Promises. Mais em nosso livro de elite: [Tasks e programação assíncrona](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#tasks).'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='NoServiceInjectionOnTagLib'/>
+        <property name='applyToFileNames' value='*TagLib.groovy' />
+        <property name='regex' value='\bdef(\s)([a-zA-Z]+)(Service)\b'/>
+        <property name='violationMessage' value='Evite injetar services em TagLibs. Opte por [usá-las com `grailsApplication`](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#taglibs-patterns)'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='NoUserAgentIdentServiceInjectionOnServices'/>
+        <property name='applyToFileNames' value='*Service.groovy' />
+        <property name='regex' value='\bdef userAgentIdentService\b'/>
+        <property name='violationMessage' value='Violação de responsabilidade. Não injete o userAgentIdentService em Services. Opte por verificar o tipo de dispositivo no controller, que é a camada responsável.'/>
+    </rule>
+
+    <!-- IllegalAbstractStaticModifiersForJava -->
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='IllegalAbstractStaticModifiersForJava'/>
+        <property name='applyToFileNames' value='*.groovy' />
+        <property name='regex' value='abstract static (.*)\((.*)\)'/>
+        <property name='violationMessage' value='Em uma classe abstrata Java, um método estático (`static`) NÃO PODE ser sobrescrito por subclasses, e um método abstrato (`abstract`) DEVE ser sobrescrito por suas subclasses. Por isso os dois modificadores não podem ser usados juntos. Mas esse erro não ocorre no `grails run-app` e acaba sendo gerado somente ao subir a aplicação via `.war` em produção, por isso a regra. Alguns detalhes no [stackoverflow](https://stackoverflow.com/questions/370962/why-cant-static-methods-be-abstract-in-java)'/>
+    </rule>
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='IllegalStaticAbstractModifiersForJava'/>
+        <property name='applyToFileNames' value='*.groovy' />
+        <property name='regex' value='static abstract (.*)\((.*)\)'/>
+        <property name='violationMessage' value='Em uma classe abstrata Java, um método estático (`static`) NÃO PODE ser sobrescrito por subclasses, e um método abstrato (`abstract`) DEVE ser sobrescrito por suas subclasses. Por isso os dois modificadores não podem ser usados juntos. Mas esse erro não ocorre no `grails run-app` e acaba sendo gerado somente ao subir a aplicação via `.war` em produção, por isso a regra. Alguns detalhes no [stackoverflow](https://stackoverflow.com/questions/370962/why-cant-static-methods-be-abstract-in-java)'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='IllegalLoggerClass'/>
+        <property name='applyToFileNames' value='*.groovy' />
+        <property name='regex' value='\blog.(trace|debug|info|warn|error|fatal)\b'/>
+        <property name='violationMessage' value='Evite usar o log padrão do Grails. Opte por usar o método previsto na classe [AsaasLogger](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#logs)'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='AvoidTokenizeMethod'/>
+        <property name='applyToFileNames' value='*.groovy'/>
+        <property name='regex' value='\.tokenize\('/>
+        <property name='violationMessage' value='Evite utilizar o método Tokenize. Em vez disso utilize o método split [Boas Práticas: Não utilizar Tokenize](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#n%C3%A3o-utilizar-tokenize).'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='AvoidFirstOrLastMethod'/>
+        <property name='applyToFileNames' value='*.groovy'/>
+        <property name='regex' value='\.(first|last)\('/>
+        <property name='violationMessage' value='Evite utilizar first() ou last(). [Boas Práticas: Não utilizar First e Last](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#n%C3%A3o-utilizar-first-e-last).'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='IllegalConfigurationAssignmentToStaticVariable'/>
+        <property name='applyToFileNames' value='*Service.groovy'/>
+        <property name='regex' value='.*(?=.*static)(?=.*(AsaasApplicationHolder|grailsApplication))(?=.*(getConfig|config)).*'/>
+        <property name='violationMessage' value='Não atribua uma configuração a uma propriedade estática em um Service. Isso pode causar erro de referência do bean grailsApplication durante o deploy, pois o motor de injeção de dependência ainda não concluiu sua injeção.'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='VerifyUriComponentsBuilderVulnerability'/>
+        <property name='applyToFileNames' value='*.groovy'/>
+        <property name='regex' value='import.*org\.springframework\.web\.util\.UriComponentsBuilder'/>
+        <property name='violationMessage' value='Verifique se a utilização do objeto `UriComponentsBuilder` afeta o Asaas com relação à vulnerabilidade [CVE-2024-22243](https://spring.io/security/cve-2024-22243)'/>
+    </rule>
+
+    <!-- Concurrency Rules -->
+    <rule class='org.codenarc.rule.concurrency.StaticSimpleDateFormatFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticDateFormatFieldRule'/>
+    <rule class='org.codenarc.rule.concurrency.StaticCalendarFieldRule'/>
+
+    <!-- Exception rules -->
+    <rule class='org.codenarc.rule.exceptions.ThrowExceptionRule'>
+        <property name='violationMessage' value='Evite lançar exceções genéricas pois elas não geram rollback em transações e podem deixar a base de dados inconsistente. Em vez disso, lance exceções mais específicas'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalClassReferenceRule'>
+        <property name='name' value='OutdatedSecuredAnnotationClass'/>
+        <property name='classNames' value='org.springframework.security.access.annotation.Secured'/>
+        <property name='violationMessage' value='Não use a classe `Secured` do pacote `org.springframework.security.access.annotation`. Substitua pela versão aprimorada do pacote 		`grails.plugin.springsecurity.annotation`.'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalClassReferenceRule'>
+        <property name='name' value='IllegalUseOfSpringRegexRequestMatcher'/>
+        <property name='classNames' value='org.springframework.security.web.util.RegexRequestMatcher, org.springframework.security.web.util.matcher.RegexRequestMatcher'/>
+        <property name='violationMessage' value='Não use a classe `RegexRequestMatcher` do pacote `org.springframework.security.web.*` devido a vulnerabilidade [CVE-2022-22978](https://nvd.nist.gov/vuln/detail/CVE-2022-22978). Caso necessário substitua pela classe `AntPathRequestMatcher`.'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.RequiredRegexRule'>
+        <property name='name' value='TransactionalRequiredInService'/>
+        <property name='applyToFileNames' value='*Service.groovy'/>
+        <property name='regex' value='@Transactional'/>
+        <property name='violationMessage' value='Todo service deve ser transacional atráves da annotation @Transactional'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='namingAmbiguousMethodInDomainWarning'/>
+        <property name='regex' value='(public|private)\s+static\s+\w+\s+(list|find|exists|count|delete)\('/>
+        <property name="applyToFilesMatching" value=".*/domain/.*"/>
+        <property name='violationMessage' value='Evite nomear métodos estáticos (`static`) em Domains com nomes que possam entrar em conflito com os métodos dinâmicos do GORM, pois isso pode causar resolução ambígua e comportamentos inesperados. Para evitar esse problema, use uma nomenclatura mais descritiva e distinta conforme [Boas práticas: Nomeação de métodos](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/asaas.md#nomeando-m%C3%A9todos) '/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalClassReferenceRule'>
+        <property name='name' value='IllegalUseOfJSONParserByteArray'/>
+        <property name='classNames' value='net.minidev.json.parser.JSONParserByteArray'/>
+        <property name='violationMessage' value='Não use a classe `JSONParserByteArray` do pacote `net.minidev.json.parser` devido a vulnerabilidade [CVE-2021-31684](https://nvd.nist.gov/vuln/detail/CVE-2021-31684). Mais detalhes, consulte seção sobre [vulnerabilidades](https://github.com/asaasdev/livro-de-elite/blob/master/processes/vulnerabilities/resolution.md) no livro de elite.'/>
+    </rule>
+
+    <rule class='org.codenarc.rule.generic.IllegalRegexRule'>
+        <property name='name' value='VerifyTransactionalImport'/>
+        <property name='applyToFileNames' value='*.groovy'/>
+        <property name='regex' value='import.*grails\.transaction\.Transactional'/>
+        <property name='violationMessage' value='Para versões de grails acima da 2, é necessário usar a classe grails.gorm.transactions.Transactional'/>
+    </rule>
+        
+    <rule class='org.codenarc.rule.convention.CompileStaticRule'>
+        <property name='violationMessage' value='Classes devem definir o tipo de compilação utilizando a anotação `@GrailsCompileStatic` para o uso da compilação estática ou `@CompileDynamic` para o uso da compilação dinâmica, conforme descrito no [livro de elite](https://github.com/asaasdev/livro-de-elite/blob/master/best-practices/compilacao-estatica.md)'/>
+        <property name="doNotApplyToFilesMatching" value=".*grails-app/migrations/.*"/>
+    </rule>
+
+    <rule-script path='file:/rulesets/custom/DefaultEncodeAsHTMLNotFoundRule.groovy'/>
+
+    <rule-script path='file:/rulesets/custom/MissingFilterInBuildCriteriaRule.groovy'>
+        <property name='applyToFilesMatching' value='.*Repository.groovy'/>
+    </rule-script>
+    
+    <rule-script path='file:/rulesets/custom/MissingSensitiveDataObjectAnnotationPropertyRule.groovy'/>
+</ruleset>
+
