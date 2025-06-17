@@ -14,10 +14,7 @@ public class CustomerService {
 
     public Customer save(Map parseInfo) {
 
-        println "Parsed Info: ${parseInfo}"
-        println "person type: typeof ${parseInfo.personType}"
         Map parsedParams = sanitizeParams(parseInfo)
-        println "Parsed Params: ${parsedParams}"
         Customer validatedCustomer = validateCustomer(parsedParams)
 
         if (validatedCustomer.hasErrors()) {
