@@ -60,7 +60,7 @@ public class Validator {
         if (cpf == cpf[0] * 11) return false
 
         def sum = 0
-        for (int i = 0; i < 9; i++) {
+        for (Integer i = 0; i < 9; i++) {
             sum += cpf[i].toInteger() * (10 - i)
         }
 
@@ -70,7 +70,7 @@ public class Validator {
         if (cpf[9].toInteger() != firstDigit) return false
         
         sum = 0
-        for (int i = 0; i < 10; i++) {
+        for (Integer i = 0; i < 10; i++) {
             sum += cpf[i].toInteger() * (11 - i)
         }
         def secondDigit = (sum * 10) % 11
@@ -94,7 +94,7 @@ public class Validator {
         def secondWeights = [6] + firstWeights
         
         def firstSum = 0
-        for (int i = 0; i < 12; i++) {
+        for (Integer i = 0; i < 12; i++) {
             firstSum += cnpj[i].toInteger() * firstWeights[i]
         }
 
@@ -104,7 +104,7 @@ public class Validator {
         if (cnpj[12].toInteger() != firstDigit) return false
 
         def secondSum = 0
-        for (int i = 0; i < 13; i++) {
+        for (Integer i = 0; i < 13; i++) {
             secondSum += cnpj[i].toInteger() * secondWeights[i]
         }
         def secondDigit = secondSum % 11
