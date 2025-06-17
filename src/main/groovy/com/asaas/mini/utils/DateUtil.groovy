@@ -15,8 +15,7 @@ public class DateUtil {
     }
 
     public static Boolean isValidBirthDate(Date birthDate) {
-
-        int minAge = 16
+        Integer minAge = 16
 
         if (!birthDate) return false
 
@@ -32,12 +31,12 @@ public class DateUtil {
         Calendar todayCal = Calendar.getInstance()
         todayCal.time = today
 
-        int age = todayCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR)
+        Integer age = todayCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR)
 
-        int currentMonth = todayCal.get(Calendar.MONTH)
-        int birthMonth = birthCal.get(Calendar.MONTH)
-        int currentDay = todayCal.get(Calendar.DAY_OF_MONTH)
-        int birthDay = birthCal.get(Calendar.DAY_OF_MONTH)
+        Integer currentMonth = todayCal.get(Calendar.MONTH)
+        Integer birthMonth = birthCal.get(Calendar.MONTH)
+        Integer currentDay = todayCal.get(Calendar.DAY_OF_MONTH)
+        Integer birthDay = birthCal.get(Calendar.DAY_OF_MONTH)
 
         if (currentMonth < birthMonth || (currentMonth == birthMonth && currentDay < birthDay)) age--
 
