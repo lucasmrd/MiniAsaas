@@ -69,19 +69,3 @@ document.addEventListener('AtlasContentLoaded', function() {
 
     new CreateCustomerController(reference);
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-    const minAge = 16;
-    const today = new Date();
-    const maxDate = today.getFullYear() - minAge;
-
-    today.setFullYear(maxDate);
-
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const year = String(today.getFullYear());
-    const maxDateFormatted = `${day}/${month}/${year}`;
-
-    const birthDate = document.getElementById('birthDate');
-    birthDate.setAttribute('max-date', maxDateFormatted);
-});

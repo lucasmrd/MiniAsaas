@@ -6,11 +6,11 @@ enum PersonType {
 	LEGAL, NATURAL
 
     public Boolean isLegal() {
-        return [PersonType.LEGAL].contains(this)
+        return PersonType.LEGAL == this
     }
 
     public Boolean isNatural() {
-        return [PersonType.NATURAL].contains(this)
+        return PersonType.NATURAL == this
     }
 
 	public String getLabel() {
@@ -19,6 +19,8 @@ enum PersonType {
 
 	public static PersonType convert(personType) {
 		try {
+			if (personType instanceof String) personType = personType.toUpperCase()
+			
 			return personType as PersonType
 		} catch(Exception e) {
 			return null
