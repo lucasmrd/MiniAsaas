@@ -36,6 +36,17 @@ management:
 
 ---
 grails:
+    plugin:
+        springsecurity:
+            userLookup:
+                userDomainClassName: 'com.asaas.mini.User'
+                authority:
+                    className: 'com.asaas.mini.Role'
+                userRole:
+                    className: 'com.asaas.mini.UserRole'
+
+---
+grails:
     mime:
         disable:
             accept:
