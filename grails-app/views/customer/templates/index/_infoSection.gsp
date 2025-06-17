@@ -1,5 +1,6 @@
 <%@ page import="com.asaas.mini.enums.CompanyType" %>
 <%@ page import="com.asaas.mini.enums.PersonType" %>
+<%@ page import="com.asaas.mini.utils.DateUtil" %>
 
 <atlas-section header="Dados do Usuário" header-size="h6">
     <atlas-grid>
@@ -56,6 +57,7 @@
                     class="js-natural-person-type-fields"
                     name="birthDate"
                     id="birthDate"
+                    max-date="${DateUtil.getMaxBirthDate()}"
                     prevent-later-date
                     required
                 ></atlas-date-picker>
