@@ -56,4 +56,17 @@ public class DateUtil {
 
         return true
     }
+
+    public static String getMaxBirthDate() {
+        Integer minAge = 16
+
+        Calendar cal = Calendar.getInstance()
+        cal.add(Calendar.YEAR, -minAge)
+
+        Date maxDate = cal.time
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy")
+
+        return sdf.format(maxDate)
+    }
 }
