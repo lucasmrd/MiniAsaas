@@ -27,6 +27,8 @@ enum CompanyType {
 
     public static CompanyType convert(companyType) {
         try {
+            if (companyType instanceof String) companyType = companyType.toUpperCase()
+
             return companyType as CompanyType
         } catch(Exception e) {
             return null
