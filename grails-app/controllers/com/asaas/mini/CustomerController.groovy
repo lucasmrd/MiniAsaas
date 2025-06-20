@@ -9,7 +9,11 @@ public class CustomerController {
 
     def save() {        
         try {
-            Customer customer = customerService.save(params)
+            Map allParams = params + session.tempUserParams
+            Customer customer = customerService.save(allParams)
+
+            session.removeAttribute('tempUserParams')
+
             render "Sucesso ao salvar cliente: ${customer.name} com ID: ${customer.id}"
         } catch (Exception e) {
             println "Error occurred: ${e.message}"
