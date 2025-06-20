@@ -38,6 +38,35 @@ management:
 grails:
     plugin:
         springsecurity:
+            controllerAnnotations:
+                staticRules:
+                    - pattern: '/css/**'
+                      access: [ 'permitAll' ]
+                    - pattern: '/js/**'
+                      access: [ 'permitAll' ]
+                    - pattern: '/images/**'
+                      access: [ 'permitAll' ]
+                    - pattern: '/login/**'
+                      access: [ 'permitAll' ]
+                    - pattern: '/logout/**'
+                      access: [ 'permitAll' ]
+                    - pattern: '/'
+                      access: [ 'permitAll' ]
+                    - pattern: '/error'
+                      access: [ 'permitAll' ]
+                    - pattern: '/index'
+                      access: [ 'permitAll' ]
+                    - pattern: '/index.gsp'
+                      access: [ 'permitAll' ]
+
+                    - pattern: '/user/index'
+                      access: [ 'permitAll' ]
+
+                    - pattern: '/customer/index'
+                      access: [ 'permitAll' ]
+
+                    - pattern: '/**'
+                      access: [ 'isFullyAuthenticated()' ]
             userLookup:
                 userDomainClassName: 'com.asaas.mini.User'
                 authority:
