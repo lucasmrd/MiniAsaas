@@ -12,9 +12,17 @@ import grails.validation.ValidationException
 @Transactional
 public class CustomerService {
 
+    UserService userService
+
     public Customer save(Map parseInfo) {
+        println("Map parseInfo: " + parseInfo)
+
+        User user = userService.buildUser(parseInfo)
 
         Map parsedParams = sanitizeParams(parseInfo)
+
+        println("Map parsedParams: " + parsedParams)
+
         Customer validatedCustomer = validateCustomer(parsedParams)
 
         if (validatedCustomer.hasErrors()) {
@@ -36,7 +44,7 @@ public class CustomerService {
         }
 
         customer.cpfCnpj = parsedParams.cpfCnpj
-        customer.email = parsedParams.email
+        customer.email = user.username
         customer.phone = parsedParams.phone
         customer.mobilePhone = parsedParams.mobilePhone
         customer.postalCode = parsedParams.postalCode
@@ -46,6 +54,8 @@ public class CustomerService {
         customer.city = parsedParams.city
         customer.state = parsedParams.state
 
+        user.customer = customer
+        user.save(flush: true, failOnError: true)
         customer.save(flush: true, failOnError: true)
 
         return customer
@@ -68,10 +78,6 @@ public class CustomerService {
                     customer.errors.rejectValue("companyName", null, "Nome da Empresa inválida!")
                 }
             }}
-        }
-
-        if (!Validator.isValidEmail(parsedParams.email)) {
-            customer.errors.rejectValue("email", null, "Email inválido!")
         }
 
         if (!Validator.isValidCpfCnpj(parsedParams.cpfCnpj)) {
@@ -97,7 +103,6 @@ public class CustomerService {
         Map sanitizedParams = [:]
         sanitizedParams.personType = PersonType.convert(parseInfo.personType)
         sanitizedParams.name = parseInfo.name?.trim()
-        sanitizedParams.email = parseInfo.email?.trim()
         sanitizedParams.birthDate = DateUtil.fromString(parseInfo.birthDate)
         sanitizedParams.phone = parseInfo.phone?.trim().replaceAll("\\D", "")
         sanitizedParams.mobilePhone = parseInfo.mobilePhone?.trim().replaceAll("\\D", "")
