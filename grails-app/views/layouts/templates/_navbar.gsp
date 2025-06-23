@@ -1,0 +1,43 @@
+<atlas-navbar slot="navbar">
+    <atlas-layout
+        inline
+        alignment="center"
+        slot="actions"
+    >
+        <atlas-avatar
+            user-name="${securityTagLib.currentUser()}"
+            data-atlas-dropdown="userMenuDropdown"
+            show-icon-mobile
+            show-carret
+            hoverable
+        ></atlas-avatar>
+        <atlas-dropdown
+            id="userMenuDropdown"
+            class="js-atlas-user-menu"
+            header="${securityTagLib.currentUser()}"
+            width="360"
+            auto-close-trigger="outside"
+            tabindex="-1"
+            auto-close
+        >
+            <atlas-dropdown-item
+                icon="cog"
+                theme="secondary"
+                href="/config/index"
+                tooltip-placement="bottom"
+                tooltip-trigger="hover focus"
+            >
+                Minha conta
+            </atlas-dropdown-item>
+            <atlas-dropdown-item
+                icon="power"
+                theme="danger"
+                href="/logout"
+                tooltip-placement="bottom"
+                tooltip-trigger="hover focus"
+            >
+                Sair
+            </atlas-dropdown-item>
+        </atlas-dropdown>
+    </atlas-layout>
+</atlas-navbar>
