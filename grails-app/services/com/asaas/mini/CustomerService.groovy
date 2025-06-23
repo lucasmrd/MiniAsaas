@@ -15,13 +15,10 @@ public class CustomerService {
     UserService userService
 
     public Customer save(Map parseInfo) {
-        println("Map parseInfo: " + parseInfo)
 
         User user = userService.buildUser(parseInfo)
 
         Map parsedParams = sanitizeParams(parseInfo)
-
-        println("Map parsedParams: " + parsedParams)
 
         Customer validatedCustomer = validateCustomer(parsedParams)
 
