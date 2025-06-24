@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Mini Asaas</title>
-    <meta name="layout" content="external"/>
+    <meta name="layout" content="internal"/>
 </head>
 <body>
     <atlas-form-panel
