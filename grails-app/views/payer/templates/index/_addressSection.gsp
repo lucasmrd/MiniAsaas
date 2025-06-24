@@ -6,12 +6,12 @@
                     name="postalCode"
                     class="js-postal-code-input"
                     id="postalCode"
-                    required                    
+                    required
                 >
                 </atlas-postal-code>
             </atlas-col>
             <atlas-col lg="3">
-                <atlas-input 
+                <atlas-input
                     label="Rua"
                     class="js-address-input"
                     name="address"
