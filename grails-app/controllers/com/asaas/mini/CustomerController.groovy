@@ -1,15 +1,25 @@
 package com.asaas.mini
 
-import com.asaas.mini.CustomerService
+import grails.plugin.springsecurity.annotation.Secured
 
 public class CustomerController {
     def customerService
 
-    def index() { }
+    @Secured(['permitAll'])
+    def index() {
+        if (!flash.userFormValidated) {
+            redirect(controller: 'user', action: 'index')
+        }
+    }
 
+    @Secured(['permitAll'])
     def save() {        
         try {
-            Customer customer = customerService.save(params)
+            Map allParams = params + session.tempUserParams
+            Customer customer = customerService.save(allParams)
+
+            session.removeAttribute('tempUserParams')
+
             render "Sucesso ao salvar cliente: ${customer.name} com ID: ${customer.id}"
         } catch (Exception e) {
             println "Error occurred: ${e.message}"
