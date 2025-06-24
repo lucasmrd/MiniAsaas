@@ -21,15 +21,6 @@
             auto-close
         >
             <atlas-dropdown-item
-                icon="cog"
-                theme="secondary"
-                href="/config/index"
-                tooltip-placement="bottom"
-                tooltip-trigger="hover focus"
-            >
-                Minha conta
-            </atlas-dropdown-item>
-            <atlas-dropdown-item
                 icon="power"
                 theme="danger"
                 href="/logout"
