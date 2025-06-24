@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Document</title>
+    <title>MiniAsaas - Dashboard</title>
     <meta name="layout" content="internal"/>
 </head>
 <body>
