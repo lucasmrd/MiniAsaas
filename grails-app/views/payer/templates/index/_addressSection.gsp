@@ -67,7 +67,7 @@
                     search-on-render
                     value-key="sigla"
                     label-key="nome"
-                    search-url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+                    search-url="https://servicodados.ibge.gov.br/api/v1/localidades/estados"
                     search-once
                     required
                 ></atlas-select>
