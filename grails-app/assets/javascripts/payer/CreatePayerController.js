@@ -26,7 +26,6 @@ function CreatePayerController(reference) {
     };
 
     const bindPayerTypeSelect = function() {
-
         personTypeSelect.addEventListener("atlas-select-change", function() {
             const selectedValue = personTypeSelect.value;
             const naturalPersonTypeFields = reference.querySelectorAll('.js-natural-person-type-fields');
