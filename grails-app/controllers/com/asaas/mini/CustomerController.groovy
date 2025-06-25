@@ -1,12 +1,14 @@
 package com.asaas.mini
 
-import com.asaas.mini.CustomerService
+import grails.plugin.springsecurity.annotation.Secured
 
 public class CustomerController {
     def customerService
 
+    @Secured(['permitAll'])
     def index() { }
 
+    @Secured(['permitAll'])
     def save() {        
         try {
             Map allParams = params + session.tempUserParams

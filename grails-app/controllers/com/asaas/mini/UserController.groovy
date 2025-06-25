@@ -1,13 +1,16 @@
 package com.asaas.mini
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 
 class UserController {
 
     UserService userService
 
+    @Secured(['permitAll'])
     def index() { }
 
+    @Secured(['permitAll'])
     def validate() {
         try {
             userService.validateUserParams(params)
