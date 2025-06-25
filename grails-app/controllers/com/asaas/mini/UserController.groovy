@@ -19,6 +19,8 @@ class UserController {
                                        password: params.password,
                                        passwordConfirmation: params.passwordConfirmation ]
 
+            flash.userFormValidated = true
+
             redirect(controller: 'customer', action: 'index')
         } catch (ValidationException e) {
             println "Error occurred: ${e.message}"

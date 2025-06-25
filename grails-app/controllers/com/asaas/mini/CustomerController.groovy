@@ -6,7 +6,11 @@ public class CustomerController {
     def customerService
 
     @Secured(['permitAll'])
-    def index() { }
+    def index() {
+        if (!flash.userFormValidated) {
+            redirect(controller: 'user', action: 'index')
+        }
+    }
 
     @Secured(['permitAll'])
     def save() {        
