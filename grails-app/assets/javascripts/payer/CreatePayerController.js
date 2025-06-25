@@ -54,7 +54,6 @@ function CreatePayerController(reference) {
 
             cpfCnpj.setAttribute('label', isNaturalPerson ? "CPF" : "CNPJ");
             cpfCnpj.setAttribute('mask-alias', isNaturalPerson ? "cpf" : "cnpj");
-
         });
     };
 
