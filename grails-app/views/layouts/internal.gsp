@@ -14,7 +14,11 @@
 
 <body class="has-atlas">
     <atlas-screen fullscreen>
-        <atlas-page container>
+        <g:render template="/layouts/templates/navbar" />
+        <g:render template="/layouts/templates/sidebar" />
+        <atlas-page>
+            <atlas-page-header page-name="${message(code:"page.name.${controllerName}.${actionName}")}" slot="header">
+            </atlas-page-header>
             <atlas-page-content slot="content">
                 <g:layoutBody/>
             </atlas-page-content>
