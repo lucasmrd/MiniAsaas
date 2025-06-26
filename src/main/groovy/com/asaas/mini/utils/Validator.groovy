@@ -68,7 +68,7 @@ public class Validator {
         if (firstDigit == 10) firstDigit = 0
 
         if (cpf[9].toInteger() != firstDigit) return false
-        
+
         sum = 0
         for (Integer i = 0; i < 10; i++) {
             sum += cpf[i].toInteger() * (11 - i)
@@ -87,12 +87,12 @@ public class Validator {
         cnpj = cnpj.replaceAll("\\D", "")
 
         if (cnpj.length() != 14) return false
-        
+
         if (cnpj == cnpj[0] * 14) return false
 
         def firstWeights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
         def secondWeights = [6] + firstWeights
-        
+
         def firstSum = 0
         for (Integer i = 0; i < 12; i++) {
             firstSum += cnpj[i].toInteger() * firstWeights[i]
@@ -119,7 +119,7 @@ public class Validator {
         return isValidCpf(cpfCnpj) || isValidCnpj(cpfCnpj)
     }
 
-    public static Boolean isValidPhone(String phone) {
+    public static Boolean isValidLandLine(String phone) {
         if (!phone) return false
 
         phone = phone.replaceAll("\\D", "")
@@ -139,6 +139,10 @@ public class Validator {
         if (!mobilePhone.matches("\\d{2}9\\d{8}")) return false
 
         return true
+    }
+
+    public static Boolean isValidPhoneNumber(String phone, String mobilePhone = null) {
+        return isValidLandLine(phone) || isValidMobilePhone(mobilePhone)
     }
 
     public static Boolean isValidPostalCode(String postalCode) {
