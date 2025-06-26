@@ -13,10 +13,18 @@ public class PayerController {
         try {
             params.customer = springSecurityService.currentUser.customer
             Payer payer = payerService.save(params)
-            render "Sucesso ao salvar pagador: ${payer.name} com ID: ${payer.id}"
+            redirect(action: "show", id: payer.id)
         } catch (Exception e) {
             println "Error occurred: ${e.message}"
             redirect(action: "index", params: [error: "Failed to save payer"])
         }
-     }
+    }
+
+    def show() {
+        Payer payer = Payer.get(params.id)
+
+        if (payer) return [payer: payer]
+
+        render "Pagador não encontrado"
+    }
 }
