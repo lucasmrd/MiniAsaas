@@ -64,9 +64,9 @@ public class CustomerService {
         if (parsedParams.personType) {
             if (parsedParams.personType.isNatural()) {
                 if (!Validator.isValidName(parsedParams.name)) {
-                    customer.errors.rejectValue("name", null, "Nome inválido!")        
+                    customer.errors.rejectValue("name", null, "Nome inválido!")
                 }
-                
+
                 if (!DateUtil.isValidBirthDate(parsedParams.birthDate)) {
                     customer.errors.rejectValue("birthDate", null, "Data de nascimento inválida!")
                 }
@@ -81,12 +81,8 @@ public class CustomerService {
             customer.errors.rejectValue("cpfCnpj", null, "CPF/CNPJ inválido!")
         }
 
-        if (!Validator.isValidPhone(parsedParams.phone)) {
-            customer.errors.rejectValue("phone", null, "Telefone inválido!")
-        }
-
-        if (!Validator.isValidMobilePhone(parsedParams.mobilePhone)) {
-            customer.errors.rejectValue("mobilePhone", null, "Celular inválido!")
+        if (!Validator.isValidPhoneNumber(parsedParams.phone, parsedParams.mobilePhone)) {
+            payer.errors.rejectValue("phone", null, "É necessário informar um celular ou um telefone válido!")
         }
 
         if (!Validator.isValidPostalCode(parsedParams.postalCode)) {
