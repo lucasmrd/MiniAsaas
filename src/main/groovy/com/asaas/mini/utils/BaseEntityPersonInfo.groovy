@@ -21,7 +21,7 @@ abstract class BaseEntityPersonInfo extends BaseEntity {
     String addressComplement
     String city
     String state
-
+    
     static constraints = {
         personType nullable: true, blank: false
         name nullable: true, blank: true, maxSize: 255
@@ -29,7 +29,7 @@ abstract class BaseEntityPersonInfo extends BaseEntity {
         companyType nullable: true, blank: true, maxSize: 255
         email nullable: false, blank: false, email: true, maxSize: 255
         phone nullable: true, blank: true, maxSize: 15
-        mobilePhone nullable: true, blank: true, maxSize:15
+        mobilePhone nullable: false, blank: false, maxSize:15
         birthDate nullable: true, blank: false
         companyCreationDate nullable: true, blank: true
         cpfCnpj nullable: false, blank: false, maxSize: 20
