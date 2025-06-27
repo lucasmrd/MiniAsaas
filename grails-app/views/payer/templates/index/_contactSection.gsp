@@ -1,4 +1,4 @@
-<atlas-section header="Dados de Contato" header-size="h6">
+<atlas-section header="Dados de Contato" header-size="h6" hide-optional>
     <atlas-grid>
         <atlas-row>
             <atlas-col lg="6">
@@ -14,19 +14,21 @@
             <atlas-col lg="3">
                 <atlas-masked-input
                     mask-alias="phone"
+                    class="js-phone-input"
                     label="Telefone"
                     name="phone"
                     id="phone"
-                    required
+                    hide-optional
                 ></atlas-masked-input>
             </atlas-col>
             <atlas-col lg="3">
                 <atlas-masked-input
                     mask-alias="cell-phone"
+                    class="js-cellphone-input"
                     label="Celular"
                     name="mobilePhone"
                     id="mobilePhone"
-                    required
+                    hide-optional
                 ></atlas-masked-input>
             </atlas-col>
         </atlas-row>

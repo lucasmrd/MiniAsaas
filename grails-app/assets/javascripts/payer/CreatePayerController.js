@@ -4,11 +4,12 @@ function CreatePayerController(reference) {
     const addressComplementInput = reference.querySelector('.js-address-complement-input');
     const cityInput = reference.querySelector('.js-city-input');
     const stateInput = reference.querySelector('.js-state-select');
-    const personTypeSelect = reference.querySelector('.js-person-type-select');
+    const phoneInput = reference.querySelector('.js-phone-input');
+    const cellphoneInput = reference.querySelector('.js-cellphone-input');
 
     const init = function() {
         bindPostalCodeInput();
-        bindPayerTypeSelect();
+        isAnyPhoneFilled();
     };
 
     const bindPostalCodeInput = function() {
@@ -25,34 +26,26 @@ function CreatePayerController(reference) {
         });
     };
 
-    const bindPayerTypeSelect = function() {
-        personTypeSelect.addEventListener("atlas-select-change", function() {
-            const selectedValue = personTypeSelect.value;
-            const naturalPersonTypeFields = reference.querySelectorAll('.js-natural-person-type-fields');
-            const legalPersonTypeFields = reference.querySelectorAll('.js-legal-person-type-fields');
-            const isNaturalPerson = selectedValue == 'NATURAL';
-            const cpfCnpj = reference.querySelector('.js-cpf-cnpj-field');
+    const isAnyPhoneFilled = function() {
+        const validator = {
+            name: "is-required-phone-or-mobile-phone-validator",
+            status: "error",
+            reportOnChange: false,
+            getInvalidMessage: function() {
+                return "É necessário ter pelo menos um telefone";
+            },
+            validate: function() {
+                return !!cellphoneInput.getElementValue() || !!phoneInput.getElementValue();
+            }
+        };
 
-            naturalPersonTypeFields.forEach((field) => {
-                field.toggleAttribute('required', isNaturalPerson);
-                if (isNaturalPerson) {
-                    field.showElement();
-                } else {
-                    field.hideElement();
-                }
-            });
-
-            legalPersonTypeFields.forEach((field) => {
-                field.toggleAttribute('required', !isNaturalPerson);
-                if (isNaturalPerson) {
-                    field.hideElement();
-                } else {
-                    field.showElement();
-                }
-            });
-
-            cpfCnpj.setAttribute('label', isNaturalPerson ? "CPF" : "CNPJ");
-            cpfCnpj.setAttribute('mask-alias', isNaturalPerson ? "cpf" : "cnpj");
+        cellphoneInput.addValidator(validator);
+        phoneInput.addValidator(validator);
+        cellphoneInput.addEventListener("atlas-input-blur", function() {
+            cellphoneInput.reportValidity();
+        });
+        phoneInput.addEventListener("atlas-input-blur", function() {
+            phoneInput.reportValidity();
         });
     };
 
