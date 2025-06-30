@@ -7,7 +7,6 @@
 <body>
     <atlas-form-panel
         class="js-list-payer-form"
-        editing
         action="${createLink(controller: 'payer', action: 'update')}"
         method="post"
         header="Detalhes do Pagador - ${payer.name}"
