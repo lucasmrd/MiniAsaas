@@ -4,6 +4,7 @@
             <atlas-col lg="3">
                 <atlas-postal-code label="CEP"
                     name="postalCode"
+                    value="${payer?.postalCode}"
                     class="js-postal-code-input"
                     id="postalCode"
                     required
@@ -15,6 +16,7 @@
                     label="Rua"
                     class="js-address-input"
                     name="address"
+                    value="${payer?.address}"
                     id="address"
                     type="text"
                     placeholder="Rua"
@@ -26,6 +28,7 @@
                 <atlas-input
                     label="Bairro"
                     name="addressComplement"
+                    value="${payer?.addressComplement}"
                     class="js-address-complement-input"
                     id="addressComplement"
                     type="text"
@@ -38,6 +41,7 @@
                 <atlas-input
                     label="Número"
                     name="addressNumber"
+                    value="${payer?.addressNumber}"
                     id="addressNumber"
                     type="number"
                     placeholder="123"
@@ -49,6 +53,7 @@
                 <atlas-input
                     label="Cidade"
                     name="city"
+                    value="${payer?.city}"
                     class="js-city-input"
                     id="city"
                     type="text"
@@ -62,6 +67,7 @@
                     class="js-state-select"
                     id="stateSelect"
                     name="state"
+                    value="${payer?.state}"
                     label="Estado"
                     placeholder="Selecione um estado"
                     search-on-render
