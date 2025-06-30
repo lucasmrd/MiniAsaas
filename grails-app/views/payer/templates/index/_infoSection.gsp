@@ -9,6 +9,7 @@
                 <atlas-input
                     label="Nome"
                     name="name"
+                    value="${payer?.name}"
                     id="name"
                     type="text"
                     placeholder="Digite seu nome"
@@ -22,6 +23,7 @@
                     label="CPF/CNPJ"
                     id="cpf"
                     name="cpfCnpj"
+                    value="${payer?.cpfCnpj}"
                     required
                 ></atlas-masked-input>
             </atlas-col>
