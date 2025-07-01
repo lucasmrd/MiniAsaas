@@ -18,8 +18,8 @@
             slot="actions"
         ></atlas-button>
         <g:render template="/payer/templates/index/infoSection" model="${[payer: payer]}"/>
-        <g:render template="/payer/templates/index/contactSection" />
-        <g:render template="/payer/templates/index/addressSection" />
+        <g:render template="/payer/templates/index/contactSection" model="${[payer: payer]}"/>
+        <g:render template="/payer/templates/index/addressSection" model="${[payer: payer]}"/>
     </atlas-form-panel>
     <asset:javascript src="payer/UpdatePayerController.js" />
 </body>
