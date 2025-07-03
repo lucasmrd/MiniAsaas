@@ -3,6 +3,7 @@
         <atlas-row>
             <atlas-col lg="6">
                 <atlas-masked-input
+                    class="js-payer-email-field"
                     mask-alias="email"
                     label="E-mail"
                     id="email"
