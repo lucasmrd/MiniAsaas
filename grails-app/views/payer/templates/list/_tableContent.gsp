@@ -4,7 +4,7 @@
             ${payer.name}
         </atlas-table-col>
         <atlas-table-col>
-            <formatTagLib:cpfCnPJ cpfCnpj="${payer?.cpfCnpj}"/>
+            <formatTagLib:cpfCnpj cpfCnpj="${payer?.cpfCnpj}"/>
         </atlas-table-col>
         <atlas-table-col>
             ${payer.email}
