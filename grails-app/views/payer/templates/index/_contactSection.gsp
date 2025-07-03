@@ -7,6 +7,7 @@
                     label="E-mail"
                     id="email"
                     name="email"
+                    value="${payer?.email}"
                     placeholder="Digite seu e-mail"
                     required
                 ></atlas-masked-input>
@@ -17,6 +18,7 @@
                     class="js-phone-input"
                     label="Telefone"
                     name="phone"
+                    value="${payer?.phone}"
                     id="phone"
                     hide-optional
                 ></atlas-masked-input>
@@ -27,6 +29,7 @@
                     class="js-cellphone-input"
                     label="Celular"
                     name="mobilePhone"
+                    value="${payer?.mobilePhone}"
                     id="mobilePhone"
                     hide-optional
                 ></atlas-masked-input>

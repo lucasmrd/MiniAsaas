@@ -56,8 +56,8 @@ public class PayerService {
             payer.errors.rejectValue("cpfCnpj", null, "CPF/CNPJ inválido!")
         }
 
-        if (!Validator.isValidPhone(parsedParams.phone) && !Validator.isValidMobilePhone(parsedParams.mobilePhone)) {
-            payer.errors.rejectValue("phone" || "mobilePhone", null, "É necessário informar um celular ou um telefone válido!")
+        if (!Validator.isValidPhoneNumber(parsedParams.phone, parsedParams.mobilePhone)) {
+            payer.errors.rejectValue("phone", null, "É necessário informar um celular ou um telefone válido!")
         }
 
         if (!Validator.isValidPostalCode(parsedParams.postalCode)) {
