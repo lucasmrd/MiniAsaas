@@ -1,5 +1,9 @@
 package com.asaas.mini
 
+import grails.converters.JSON
+
+import javax.xml.bind.ValidationException
+
 public class PayerController {
 
     def payerService
@@ -26,5 +30,21 @@ public class PayerController {
         if (payer) return [payer: payer]
 
         render "Pagador não encontrado"
+    }
+
+    def validate() {
+        try {
+            payerService.validatePayerStep(params)
+
+            render([status: 'SUCCESS'] as JSON)
+        } catch (ValidationException e) {
+            response.status = 400
+
+            def fieldErrors = e.errors.fieldErrors.collectEntries { fe ->
+                [(fe.field): message(error: fe)]
+            }
+
+            render([status: 'ERROR', errors: fieldErrors] as JSON)
+        }
     }
 }
