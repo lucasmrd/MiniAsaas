@@ -14,7 +14,9 @@ class PaymentController {
     }
 
     def create() {
-        List<Payer> payerList = Payer.list()
+        def customer = springSecurityService.currentUser.customer
+
+        List<Payer> payerList = Payer.findAllByCustomer(customer)
 
         return [payerList: payerList]
     }
