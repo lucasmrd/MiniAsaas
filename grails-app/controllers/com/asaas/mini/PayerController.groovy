@@ -1,10 +1,14 @@
 package com.asaas.mini
 
+import com.asaas.mini.Customer
+import com.asaas.mini.utils.BaseController
+import com.asaas.mini.utils.Validator
+
 import grails.converters.JSON
 
 import javax.xml.bind.ValidationException
 
-public class PayerController {
+public class PayerController extends BaseController {
 
     def payerService
     def springSecurityService
@@ -46,5 +50,47 @@ public class PayerController {
 
             render([status: 'ERROR', errors: fieldErrors] as JSON)
         }
+    }
+
+    def list() {
+        List<Payer> payerList = listPayer()
+
+        return [payerList: payerList]
+    }
+
+    def loadTableContent() {
+        Boolean success = true
+        String content = ""
+        Integer totalCount = 0
+        String responseMessage = ""
+
+        try {
+            List<Payer> payerList = listPayer()
+            content = g.render(template:"/payer/templates/list/tableContent", model:[payerList: payerList])
+            totalCount = payerList.totalCount
+        } catch(Exception exception) {
+            success = false
+            responseMessage = "Não foi possível atualizar a listagem."
+        } finally {
+            render([success: success, content: content, totalRecords: totalCount, message: responseMessage] as JSON)
+        }
+    }
+
+    private List<Payer> listPayer() {
+        Customer customer = springSecurityService.currentUser.customer
+        Map searchParams = [
+                customerId: springSecurityService.currentUser.customer.id
+        ]
+
+        if (params.name) {
+            String onlyNumbers = params.name?.replaceAll("\\D+","")
+            if (Validator.isValidCpfCnpj(onlyNumbers)) {
+                searchParams.cpfCnpj = onlyNumbers
+            } else {
+                searchParams.name = params.name
+            }
+        }
+
+        return Payer.query(searchParams).list(max: getLimitPerPage(), offset: getCurrentPage())
     }
 }
