@@ -79,7 +79,7 @@ public class PayerController extends BaseController {
     private List<Payer> listPayer() {
         Customer customer = springSecurityService.currentUser.customer
         Map searchParams = [
-            customerId: springSecurityService.currentUser.customer.id
+                customerId: springSecurityService.currentUser.customer.id
         ]
 
         if (params.name) {
