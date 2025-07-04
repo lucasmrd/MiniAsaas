@@ -27,6 +27,7 @@
                 icon="files"
                 value="list-payment"
                 text="Minhas cobranças"
+                href="${createLink(controller: "payment", action: "list")}"
             ></atlas-sidebar-menu-item>
         </atlas-sidebar-menu-item>
     </atlas-sidebar-menu>
