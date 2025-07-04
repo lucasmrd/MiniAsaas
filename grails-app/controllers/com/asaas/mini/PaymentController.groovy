@@ -10,7 +10,9 @@ class PaymentController extends BaseController {
 
     def springSecurityService
 
-    def index() {}
+    def index() {
+        redirect(action: "create")
+    }
 
     def create() {
         List<Payer> payerList = Payer.list()

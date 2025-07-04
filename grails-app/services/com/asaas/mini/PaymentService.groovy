@@ -11,7 +11,6 @@ import grails.validation.ValidationException
 class PaymentService {
 
     def payerService
-    def springSecurityService
 
     public void validate(Map parseInfo) {
         Map parsedParams = sanitizeParams(parseInfo)
@@ -32,7 +31,6 @@ class PaymentService {
                 throw new ValidationException("Cliente selecionado com ID ${parseInfo.long('payerId')} não foi encontrado.")
             }
         } else {
-            parseInfo.customer = springSecurityService.currentUser.customer
             payer = payerService.save(parseInfo)
         }
 
