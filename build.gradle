@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url "https://repo.grails.org/grails/core" }
+        mavenCentral()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
@@ -23,6 +24,7 @@ apply plugin:"com.bertramlabs.asset-pipeline"
 
 repositories {
     maven { url "https://repo.grails.org/grails/core" }
+    mavenCentral()
 }
 
 configurations {
@@ -59,6 +61,8 @@ dependencies {
     implementation "org.grails.plugins:gsp"
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'org.grails.plugins:spring-security-core:4.0.3'
+    implementation "org.grails.plugins:quartz:2.0.13"
+    implementation "org.quartz-scheduler:quartz:2.3.2"
     profile "org.grails.profiles:web"
     runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
     runtimeOnly "com.h2database:h2"
