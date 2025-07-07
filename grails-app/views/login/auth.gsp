@@ -45,7 +45,7 @@
                             name="remember-me"
                             id="remember_me"
                         >
-                            Lembrar-me
+                            Continuar conectado
                         </atlas-checkbox>
 
                         <atlas-layout gap="4">
