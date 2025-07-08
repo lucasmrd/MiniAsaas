@@ -65,6 +65,20 @@ class PaymentController extends BaseController {
         }
     }
 
+    def delete() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            paymentService.delete(params.long('id'), customer)
+
+            render([Status: 'SUCCESS', message: 'Cobrança excluída com sucesso!'] as JSON)
+        } catch( Exception e) {
+            println("Erro ao excluir cobrança: ${e.message}")
+
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
+    }
+
     def list() {
         List<Payment> paymentList = listPayment()
 
