@@ -31,6 +31,7 @@ class Payment extends BaseEntity {
 
     static namedQueries = {
         query {Map search ->
+            eq('deleted', false)
 
             createAlias('payer', 'p')
 
