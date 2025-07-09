@@ -72,8 +72,22 @@ class PaymentController extends BaseController {
             paymentService.delete(params.long('id'), customer)
 
             render([Status: 'SUCCESS', message: 'Cobrança excluída com sucesso!'] as JSON)
-        } catch( Exception e) {
+        } catch(Exception e) {
             println("Erro ao excluir cobrança: ${e.message}")
+
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
+    }
+
+    def restore() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            paymentService.restore(params.long('id'), customer)
+
+            render([Status: 'SUCCESS', message: 'Cobrança restaurada com sucesso!'] as JSON)
+        } catch(Exception e) {
+            println("Erro ao restaurar cobrança: ${e.message}")
 
             render([status: 'ERROR', message: e.message] as JSON)
         }
