@@ -4,15 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Detalhes da cobrança</title>
+    <title>Dados da cobrança</title>
     <meta name="layout" content="internal"/>
 </head>
 <body>
 <atlas-form-panel
     class="js-list-payment-form"
-    action="${createLink(controller: 'payment', action: 'update')}"
+    action="${createLink(controller: 'payment', action: 'update', id: payment.id)}"
     method="post"
-    header="Detalhes da cobrança"
+    header="Dados da cobrança"
 >
     <atlas-button
         description="Editar"
