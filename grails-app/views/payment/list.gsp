@@ -21,7 +21,9 @@
             ></atlas-button>
         </atlas-toolbar>
         <atlas-easy-table
+            class="js-payment-list-table"
             url="${createLink(controller:"payment", action:"loadTableContent")}"
+            has-actions
             total-records="${paymentList.totalCount}"
             items-per-page="10"
             columns='[{"name":"name","label":"Nome","size":"md","ellipsis":true,"sortable":true},
