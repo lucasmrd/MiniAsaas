@@ -129,6 +129,22 @@ class PaymentController extends BaseController {
         }
     }
 
+    def confirm() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            paymentService.confirm(params.long('id'), customer)
+
+            flash.message = "Pagamento confirmado com sucesso"
+        } catch(Exception e) {
+            log.error("Erro ao confirmar pagamento: ${e.message}", e)
+
+            flash.error = "Erro ao confirmar pagamento"
+        }
+
+        redirect(action: "list")
+    }
+
     def list() {
         List<Payment> paymentList = listPayment()
 
