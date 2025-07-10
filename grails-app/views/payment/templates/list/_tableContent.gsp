@@ -32,6 +32,7 @@
                     data-id="${payment.id}"
                 ></atlas-icon-button>
                 <atlas-icon-button
+                    class="js-open-modal-button"
                     icon="trash"
                     theme="danger"
                     tooltip="Excluir cobrança"
