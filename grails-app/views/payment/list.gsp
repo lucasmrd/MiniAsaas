@@ -6,6 +6,13 @@
 </head>
 <body>
 <atlas-panel class="js-payment-list-panel">
+    <g:if test="${flash.message}">
+        <atlas-alert class="js-flash-alert" type="success" message="${flash.message}"></atlas-alert>
+    </g:if>
+    <g:if test="${flash.error}">
+        <atlas-alert class="js-flash-alert" type="danger" message="${flash.error}"></atlas-alert>
+    </g:if>
+
     <g:if test="${paymentList}">
         <atlas-toolbar>
             <atlas-search-input
