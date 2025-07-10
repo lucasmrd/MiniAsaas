@@ -8,6 +8,12 @@
     <meta name="layout" content="internal"/>
 </head>
 <body>
+<g:if test="${flash.message}">
+    <atlas-alert class="js-flash-alert" type="success" message="${flash.message}"></atlas-alert>
+</g:if>
+<g:if test="${flash.error}">
+    <atlas-alert class="js-flash-alert" type="danger" message="${flash.error}"></atlas-alert>
+</g:if>
 <atlas-form-panel
     class="js-list-payment-form"
     action="${createLink(controller: 'payment', action: 'update', id: payment.id)}"
@@ -81,7 +87,7 @@
             </atlas-col>
         </atlas-row>
     </atlas-grid>
-
 </atlas-form-panel>
+<asset:javascript src="payment/show/ShowPaymentController.js"/>
 </body>
 </html>
