@@ -21,13 +21,18 @@
         <g:render template="/payment/templates/create/introStepSection"/>
     </atlas-wizard-intro-step>
     <atlas-wizard-step header="Dados da cobrança" name="paymentInfo" class="js-payment-info-step">
-        <g:render template="/payment/templates/create/paymentInfoSection"/>
+        <atlas-section header="O que cobrar?">
+            <g:render template="/payment/templates/create/paymentInfoSection"/>
+        </atlas-section>
+
         <g:render template="/payment/templates/create/billingTypeSection"/>
     </atlas-wizard-step>
 
     <atlas-wizard-step header="Dados do cliente" name="payerInfo" class="js-payer-info-step">
         <atlas-layout gap="9">
-            <g:render template="/payment/templates/create/existingPayerSection"/>
+            <atlas-section header="Quem você vai cobrar?">
+                <g:render template="/payment/templates/create/existingPayerSection"/>
+            </atlas-section>
             <div class="js-new-payer-section" hidden>
                 <g:render template="/payment/templates/create/newPayerSection"/>
             </div>
