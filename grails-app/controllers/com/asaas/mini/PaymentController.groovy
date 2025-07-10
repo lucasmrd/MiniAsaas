@@ -73,8 +73,6 @@ class PaymentController extends BaseController {
         Payment payment = Payment.get(params.id)
 
         if (payment) return [payment: payment, payerList: payerList]
-
-        render([status: 'ERROR', errors: "Cobrança não encontrada"] as JSON)
     }
 
     def update() {
@@ -83,22 +81,14 @@ class PaymentController extends BaseController {
 
             Payment updatedPayment = paymentService.update(params, customer)
 
-            render([
-                status: 'SUCCESS',
-                message: "Cobrança ID ${updatedPayment.id} atualizada com sucesso!",
-                redirectUrl: createLink(action: "show", id: updatedPayment.id)
-            ] as JSON)
-        } catch (ValidationException e) {
-            response.status = 400
-            def fieldErrors = e.errors.fieldErrors.collectEntries { fe ->
-                [(fe.field): message(error: fe)]
-            }
-            render([status: 'ERROR', errors: fieldErrors] as JSON)
+            flash.message = "Cobrança atualizada com sucesso"
         } catch (Exception e) {
             log.error("Erro ao atualizar cobrança: ${e.message}", e)
-            response.status = 500
-            render([status: 'ERROR', message: e.message] as JSON)
+
+            flash.error = "Erro ao excluir cobrança"
         }
+
+        redirect(action: "show", id: params.id)
     }
 
     def delete() {
@@ -107,12 +97,14 @@ class PaymentController extends BaseController {
 
             paymentService.delete(params.long('id'), customer)
 
-            render([Status: 'SUCCESS', message: 'Cobrança excluída com sucesso!'] as JSON)
+            flash.message = "Cobrança excluida com sucesso"
         } catch(Exception e) {
-            println("Erro ao excluir cobrança: ${e.message}")
+            log.error("Erro ao excluir cobrança: ${e.message}", e)
 
-            render([status: 'ERROR', message: e.message] as JSON)
+            flash.error = "Erro ao excluir cobrança"
         }
+
+        redirect(action: "list")
     }
 
     def restore() {
@@ -121,12 +113,14 @@ class PaymentController extends BaseController {
 
             paymentService.restore(params.long('id'), customer)
 
-            render([Status: 'SUCCESS', message: 'Cobrança restaurada com sucesso!'] as JSON)
+            flash.message = "Cobrança restaurada com sucesso"
         } catch(Exception e) {
-            println("Erro ao restaurar cobrança: ${e.message}")
+            log.error("Erro ao restaurar cobrança: ${e.message}", e)
 
-            render([status: 'ERROR', message: e.message] as JSON)
+            flash.error = "Erro ao restaurar cobrança"
         }
+
+        redirect(action: "list")
     }
 
     def confirm() {
