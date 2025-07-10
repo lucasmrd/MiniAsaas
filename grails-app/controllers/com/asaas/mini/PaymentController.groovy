@@ -65,6 +65,18 @@ class PaymentController extends BaseController {
         }
     }
 
+    def show() {
+        def customer = springSecurityService.currentUser.customer
+
+        List<Payer> payerList = Payer.findAllByCustomer(customer)
+
+        Payment payment = Payment.get(params.id)
+
+        if (payment) return [payment: payment, payerList: payerList]
+
+        render([status: 'ERROR', errors: "Cobrança não encontrada"] as JSON)
+    }
+
     def delete() {
         try {
             def customer = springSecurityService.currentUser.customer
