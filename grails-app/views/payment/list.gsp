@@ -24,11 +24,11 @@
             url="${createLink(controller:"payment", action:"loadTableContent")}"
             total-records="${paymentList.totalCount}"
             items-per-page="10"
-            columns='[{"name":"name","label":"Nome","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"value","label":"Valor","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"description","label":"Descrição","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"billingType","label":"Forma de pagamento","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"dueDate","label":"Data de vencimento","size":"sm","ellipsis":true,"sortable":true}]'
+            columns='[{"name":"name","label":"Nome","size":"md","ellipsis":true,"sortable":true},
+            {"name":"value","label":"Valor","size":"md","ellipsis":true,"sortable":true},
+            {"name":"description","label":"Descrição","size":"md","ellipsis":true,"sortable":true},
+            {"name":"billingType","label":"Forma de pagamento","size":"md","ellipsis":true,"sortable":true},
+            {"name":"dueDate","label":"Data de vencimento","size":"lg","ellipsis":true,"sortable":true}]'
         >
             <atlas-empty-state
                 slot="empty-state-template"
@@ -56,5 +56,5 @@
         </atlas-empty-state>
     </g:else>
 </atlas-panel>
-<asset:javascript src="payment/ListPaymentController.js"/>
+<asset:javascript src="payment/list/ListPaymentController.js"/>
 </body>
