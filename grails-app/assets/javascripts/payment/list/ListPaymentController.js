@@ -1,8 +1,10 @@
 //= require helpers/AtlasTableFilterController
+//= require modal/ModalComponent
 
 function ListPaymentController(reference) {
 
     let tableReference;
+    let modalReference;
     let atlasTableFilterController;
 
     const init = function() {
@@ -26,8 +28,9 @@ function ListPaymentController(reference) {
 
     const initReferences = function() {
         tableReference = reference.querySelector('.js-payment-list-table');
+        modalReference = reference.querySelector('.js-modal');
 
-        return tableReference;
+        return modalReference && tableReference;
     };
 
     const bindPayerListTable = function() {
@@ -45,7 +48,19 @@ function ListPaymentController(reference) {
             }
 
             if (buttonAction === "excluir") {
-                window.location.href = `/payment/delete?id=${id}`;
+                let modalInstance = new ModalComponent({
+                    reference: modalReference,
+                    confirmationCallback: function() {
+                        window.location.href = `/payment/delete?id=${id}`;
+                    },
+                    cancelationCallback: function() {},
+                    confirmButtonTheme: "danger",
+                    confirmButtonLabel: "Excluir",
+                    htmlContent: `Deseja realmente excluir a cobrança?`,
+                    autoCloseOnConfirmation: true,
+                });
+
+                modalInstance.open();
             }
         });
     };
