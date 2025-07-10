@@ -77,6 +77,30 @@ class PaymentController extends BaseController {
         render([status: 'ERROR', errors: "Cobrança não encontrada"] as JSON)
     }
 
+    def update() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            Payment updatedPayment = paymentService.update(params, customer)
+
+            render([
+                status: 'SUCCESS',
+                message: "Cobrança ID ${updatedPayment.id} atualizada com sucesso!",
+                redirectUrl: createLink(action: "show", id: updatedPayment.id)
+            ] as JSON)
+        } catch (ValidationException e) {
+            response.status = 400
+            def fieldErrors = e.errors.fieldErrors.collectEntries { fe ->
+                [(fe.field): message(error: fe)]
+            }
+            render([status: 'ERROR', errors: fieldErrors] as JSON)
+        } catch (Exception e) {
+            log.error("Erro ao atualizar cobrança: ${e.message}", e)
+            response.status = 500
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
+    }
+
     def delete() {
         try {
             def customer = springSecurityService.currentUser.customer
