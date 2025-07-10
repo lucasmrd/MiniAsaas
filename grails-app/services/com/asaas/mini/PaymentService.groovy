@@ -120,6 +120,20 @@ class PaymentService {
         payment.markDirty('deleted')
     }
 
+    public void confirm(Long id, Customer customer) {
+        if (!id) {
+            throw new IllegalArgumentException("ID da cobrança nulo.")
+        }
+
+        Payment payment = Payment.findByIdAndCustomer(id, customer)
+
+        if (!payment) {
+            throw new RuntimeException("Cobrança não encontrada!")
+        }
+
+        payment.status = PaymentStatus.CONFIRMED
+    }
+
     private Payment validatePayment(Map parsedParams) {
         Payment payment = new Payment()
 
