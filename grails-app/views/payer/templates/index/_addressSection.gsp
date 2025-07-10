@@ -39,6 +39,7 @@
             </atlas-col>
             <atlas-col lg="3">
                 <atlas-input
+                    class="js-address-number-input"
                     label="Número"
                     name="addressNumber"
                     value="${payer?.addressNumber}"

@@ -7,6 +7,7 @@
         <atlas-row>
             <atlas-col lg="6">
                 <atlas-input
+                    class="js-payer-name-field"
                     label="Nome"
                     name="name"
                     value="${payer?.name}"
