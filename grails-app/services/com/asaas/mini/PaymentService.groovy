@@ -90,6 +90,21 @@ class PaymentService {
         return payment.save(flush: true, failOnError: true)
     }
 
+    public List<Payment> list(Map criteria) {
+        def queryParams = [
+                max: criteria.int('max'),
+                offset: criteria.int('offset'),
+                sort: criteria.sort ?: 'dueDate',
+                order: criteria.order ?: 'desc'
+        ]
+
+        if (criteria.boolean('deleted')) {
+            return Payment.excludedPayments(criteria).list(queryParams)
+        } else {
+            return Payment.query(criteria).list(queryParams)
+        }
+    }
+
     public void delete(Long id, Customer customer) {
         if (!id) {
             throw new IllegalArgumentException("ID da cobrança nulo.")
