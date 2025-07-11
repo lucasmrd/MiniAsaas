@@ -9,6 +9,8 @@ public class Payer extends BaseEntityPersonInfo {
     static namedQueries = {
         query { Map search ->
 
+            eq("deleted", false)
+
             if (!search.containsKey("customerId")) {
                 throw new RuntimeException("Payer.query(): o atributo [customerId] é obrigatório para executar a consulta.")
             }
