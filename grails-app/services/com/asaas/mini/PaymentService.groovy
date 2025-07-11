@@ -98,6 +98,12 @@ class PaymentService {
                 order: criteria.order ?: 'desc'
         ]
 
+        def statusEnum = PaymentStatus.convert(criteria.status)
+
+        if (statusEnum == PaymentStatus.CONFIRMED) {
+            return Payment.confirmedPayments(criteria).list(queryParams)
+        }
+
         if (criteria.boolean('deleted')) {
             return Payment.excludedPayments(criteria).list(queryParams)
         } else {
