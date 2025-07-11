@@ -21,9 +21,11 @@
                 ></atlas-button>
             </atlas-toolbar>
             <atlas-easy-table
+                class="js-payer-list-panel"
                 url="${createLink(controller:"payer", action:"loadTableContent")}"
                 total-records="${ payerList.totalCount }"
                 items-per-page="10"
+                has-actions
                 columns='[{"name":"name","label":"Nome","size":"lg","ellipsis":true,"sortable":true},{"name":"cpfCnpj","label":"CPF/CNPJ","size":"lg","ellipsis":true,"sortable":true},{"name":"email","label":"E-mail","size":"lg","ellipsis":true,"sortable":true}]'
             >
                 <atlas-empty-state
