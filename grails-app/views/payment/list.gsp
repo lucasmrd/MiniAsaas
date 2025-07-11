@@ -15,19 +15,25 @@
 
     <g:if test="${paymentList}">
 
-    <atlas-modal header="Deseja excluir a cobrança?" class="js-modal">
+    <atlas-modal header="Deseja excluir a cobrança?" class="js-delete-modal">
         <atlas-text class="js-modal-content"></atlas-text>
         <atlas-button
             class="js-cancel-button js-close-modal-button"
             slot="actions"
             type="outlined"
         ></atlas-button>
-        <atlas-button
-            class="js-confirm-button"
-            slot="actions"
-        >
-        </atlas-button>
+        <atlas-button class="js-confirm-button" slot="actions"></atlas-button>
     </atlas-modal>
+    <atlas-modal header="Deseja restaurar a cobrança?" class="js-restore-modal">
+        <atlas-text class="js-modal-content"></atlas-text>
+        <atlas-button
+            class="js-cancel-button js-close-modal-button"
+            slot="actions"
+            type="outlined"
+        ></atlas-button>
+        <atlas-button class="js-confirm-button" slot="actions"></atlas-button>
+    </atlas-modal>
+
         <atlas-toolbar>
             <atlas-search-input
                 slot="search"
