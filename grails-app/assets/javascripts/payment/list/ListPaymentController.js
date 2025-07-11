@@ -62,6 +62,22 @@ function ListPaymentController(reference) {
 
                 modalInstance.open();
             }
+
+            if (buttonAction === "restaurar") {
+                let modalInstance = new ModalComponent({
+                    reference: modalReference,
+                    confirmationCallback: function() {
+                        window.location.href = `/payment/restore?id=${id}`;
+                    },
+                    cancelationCallback: function() {},
+                    confirmButtonTheme: "primary",
+                    confirmButtonLabel: "Restaurar",
+                    htmlContent: `Deseja restaurar essa cobrança?`,
+                    autoCloseOnConfirmation: true,
+                });
+
+                modalInstance.open();
+            }
         });
     };
 
