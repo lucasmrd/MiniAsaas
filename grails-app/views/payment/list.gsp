@@ -31,7 +31,7 @@
         <atlas-toolbar>
             <atlas-search-input
                 slot="search"
-                name="name"
+                name="term"
                 placeholder="Procurar por nome ou email do cliente"
             ></atlas-search-input>
             <atlas-button
@@ -43,7 +43,8 @@
         </atlas-toolbar>
         <atlas-easy-table
             class="js-payment-list-table"
-            url="${createLink(controller:"payment", action:"loadTableContent")}"
+            url="${createLink(controller:"payment", action:"loadTableContent",
+                    params: params.subMap(['term', 'status', 'deleted']))}"
             has-actions
             total-records="${paymentList.totalCount}"
             items-per-page="10"
@@ -61,7 +62,7 @@
                 description="Tente ajustar os filtros ou realizar uma nova busca."
             >
             </atlas-empty-state>
-            <g:render template="/payment/templates/list/tableContent" model="[paymentList: paymentList]" />
+            <g:render template="/payment/templates/list/tableContent" model="[paymentList: paymentList, params: params]" />
         </atlas-easy-table>
     </g:if>
     <g:else>
