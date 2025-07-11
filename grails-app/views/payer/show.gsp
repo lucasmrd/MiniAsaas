@@ -7,7 +7,7 @@
 <body>
     <atlas-form-panel
         class="js-list-payer-form"
-        action="${createLink(controller: 'payer', action: 'update')}"
+        action="${createLink(controller: 'payer', action: 'update', id: payer.id)}"
         method="post"
         header="Detalhes do Pagador - ${payer.name}"
     >
@@ -21,6 +21,6 @@
         <g:render template="/payer/templates/index/contactSection" model="${[payer: payer]}"/>
         <g:render template="/payer/templates/index/addressSection" model="${[payer: payer]}"/>
     </atlas-form-panel>
-    <asset:javascript src="payer/UpdatePayerController.js" />
+    <asset:javascript src="payer/ListPayerController.js" />
 </body>
 </html>
