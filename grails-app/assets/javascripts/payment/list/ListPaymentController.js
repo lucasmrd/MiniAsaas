@@ -11,7 +11,18 @@ function ListPaymentController(reference) {
         const alertElements = document.querySelectorAll('.js-flash-alert');
 
         atlasTableFilterController = new AtlasTableFilterController(reference, {
-            initBindTable: true
+            initBindTable: true,
+
+            customBuildFilterData: function() {
+                const baseParams = tableReference.params || {};
+
+                const searchInput = reference.querySelector('atlas-search-input');
+                if (searchInput && searchInput.value) {
+                    baseParams.term = searchInput.value;
+                }
+
+                return baseParams;
+            }
         });
 
         alertElements.forEach(alertElement => {
@@ -44,6 +55,10 @@ function ListPaymentController(reference) {
             }
 
             if (buttonAction === "editar") {
+                window.location.href = `/payment/show?id=${id}`;
+            }
+
+            if (buttonAction === "exibir") {
                 window.location.href = `/payment/show?id=${id}`;
             }
 
