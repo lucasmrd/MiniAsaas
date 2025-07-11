@@ -47,6 +47,24 @@ class Payment extends BaseEntity {
             }
         }
 
+        confirmedPayments {Map search ->
+            eq('deleted', false)
+            eq('status', PaymentStatus.CONFIRMED)
+
+            createAlias('payer', 'p')
+
+            if (search.customer) {
+                eq('customer', search.customer)
+            }
+
+            if (search.term) {
+                or {
+                    ilike('p.name', "%${search.term}%")
+                    ilike('p.email', "${search.term}")
+                }
+            }
+        }
+
         excludedPayments {Map search ->
             eq('deleted', true)
 
