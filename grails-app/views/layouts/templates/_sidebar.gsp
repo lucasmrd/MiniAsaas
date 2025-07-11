@@ -36,6 +36,12 @@
                 href="${createLink(controller: "payment", action: "list", params: [status: 'CONFIRMED'])}"
             ></atlas-sidebar-menu-item>
             <atlas-sidebar-menu-item
+                icon="clock"
+                value="list-payment"
+                text="Vencidas"
+                href="${createLink(controller: "payment", action: "list", params: [status: 'OVERDUE'])}"
+            ></atlas-sidebar-menu-item>
+            <atlas-sidebar-menu-item
                 icon="trash"
                 value="list-payment"
                 text="Excluídas"
