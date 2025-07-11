@@ -30,6 +30,12 @@
                 href="${createLink(controller: "payment", action: "list")}"
             ></atlas-sidebar-menu-item>
             <atlas-sidebar-menu-item
+                icon="file-check"
+                value="list-payment"
+                text="Pagas"
+                href="${createLink(controller: "payment", action: "list", params: [status: 'CONFIRMED'])}"
+            ></atlas-sidebar-menu-item>
+            <atlas-sidebar-menu-item
                 icon="trash"
                 value="list-payment"
                 text="Excluídas"
