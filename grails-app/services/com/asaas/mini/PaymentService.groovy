@@ -104,6 +104,10 @@ class PaymentService {
             return Payment.confirmedPayments(criteria).list(queryParams)
         }
 
+        if (statusEnum == PaymentStatus.OVERDUE) {
+            return Payment.overduePayments(criteria).list(queryParams)
+        }
+
         if (criteria.boolean('deleted')) {
             return Payment.excludedPayments(criteria).list(queryParams)
         } else {
