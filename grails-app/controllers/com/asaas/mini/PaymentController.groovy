@@ -140,9 +140,11 @@ class PaymentController extends BaseController {
     }
 
     def list() {
-        List<Payment> paymentList = listPayment()
+        params.customer = springSecurityService.currentUser.customer
 
-        return [paymentList: paymentList]
+        List<Payment> paymentList = paymentService.list(params)
+
+        return [paymentList: paymentList, params: params]
     }
 
     def loadTableContent() {
@@ -151,9 +153,14 @@ class PaymentController extends BaseController {
         Integer totalCount = 0
         String responseMessage = ""
 
+        params.max = getLimitPerPage()
+        params.offset = getCurrentPage()
+        params.customer = springSecurityService.currentUser.customer
+
         try {
-            List<Payment> paymentList = listPayment()
-            content = g.render(template:"/payment/templates/list/tableContent", model:[paymentList: paymentList])
+            List<Payment> paymentList = paymentService.list(params)
+            content = g.render(template:"/payment/templates/list/tableContent",
+                    model:[paymentList: paymentList, params: params])
             totalCount = paymentList.totalCount
         } catch(Exception exception) {
             success = false
@@ -161,18 +168,5 @@ class PaymentController extends BaseController {
         } finally {
             render([success: success, content: content, totalRecords: totalCount, message: responseMessage] as JSON)
         }
-    }
-
-    private List<Payment> listPayment() {
-        Customer customer = springSecurityService.currentUser.customer
-
-        Map searchParams = [:]
-        searchParams.customer = customer
-
-        if (params.name) {
-            searchParams.term = params.name
-        }
-
-        return Payment.query(searchParams).list(max: getLimitPerPage(), offset: getCurrentPage())
     }
 }
