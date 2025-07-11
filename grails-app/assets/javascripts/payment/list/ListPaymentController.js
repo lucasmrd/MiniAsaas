@@ -4,7 +4,8 @@
 function ListPaymentController(reference) {
 
     let tableReference;
-    let modalReference;
+    let deleteModalReference;
+    let restoreModalReference;
     let atlasTableFilterController;
 
     const init = function() {
@@ -39,9 +40,10 @@ function ListPaymentController(reference) {
 
     const initReferences = function() {
         tableReference = reference.querySelector('.js-payment-list-table');
-        modalReference = reference.querySelector('.js-modal');
+        deleteModalReference = reference.querySelector('.js-delete-modal');
+        restoreModalReference = reference.querySelector('.js-restore-modal');
 
-        return modalReference && tableReference;
+        return deleteModalReference && restoreModalReference && tableReference;
     };
 
     const bindPayerListTable = function() {
@@ -64,7 +66,7 @@ function ListPaymentController(reference) {
 
             if (buttonAction === "excluir") {
                 let modalInstance = new ModalComponent({
-                    reference: modalReference,
+                    reference: deleteModalReference,
                     confirmationCallback: function() {
                         window.location.href = `/payment/delete?id=${id}`;
                     },
@@ -80,7 +82,7 @@ function ListPaymentController(reference) {
 
             if (buttonAction === "restaurar") {
                 let modalInstance = new ModalComponent({
-                    reference: modalReference,
+                    reference: restoreModalReference,
                     confirmationCallback: function() {
                         window.location.href = `/payment/restore?id=${id}`;
                     },
