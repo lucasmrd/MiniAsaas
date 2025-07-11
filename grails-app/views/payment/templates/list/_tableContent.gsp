@@ -25,6 +25,13 @@
                         description="restaurar"
                         data-id="${payment.id}"
                     ></atlas-icon-button>
+                    <atlas-icon-button
+                        icon="eye"
+                        theme="primary"
+                        tooltip="Exibir detalhes"
+                        description="exibir"
+                        data-id="${payment.id}"
+                    ></atlas-icon-button>
                 </g:if>
                 <g:elseif test="${params.status == 'CONFIRMED'}">
                     <atlas-icon-button
@@ -32,6 +39,23 @@
                         theme="primary"
                         tooltip="Exibir detalhes"
                         description="exibir"
+                        data-id="${payment.id}"
+                    ></atlas-icon-button>
+                </g:elseif>
+                <g:elseif test="${params.status == 'OVERDUE'}">
+                    <atlas-icon-button
+                        icon="eye"
+                        theme="primary"
+                        tooltip="Exibir detalhes"
+                        description="exibir"
+                        data-id="${payment.id}"
+                    ></atlas-icon-button>
+                    <atlas-icon-button
+                        class="js-open-modal-button"
+                        icon="trash"
+                        theme="danger"
+                        tooltip="Excluir cobrança"
+                        description="excluir"
                         data-id="${payment.id}"
                     ></atlas-icon-button>
                 </g:elseif>
