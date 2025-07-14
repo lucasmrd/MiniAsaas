@@ -5,6 +5,7 @@ import com.asaas.mini.utils.BaseController
 import com.asaas.mini.utils.Validator
 
 import grails.converters.JSON
+import grails.validation.ValidationException
 
 import javax.xml.bind.ValidationException
 
@@ -20,7 +21,9 @@ public class PayerController extends BaseController {
     def save() {
         try {
             params.customer = springSecurityService.currentUser.customer
+
             Payer payer = payerService.save(params)
+
             redirect(action: "show", id: payer.id)
         } catch (Exception e) {
             println "Error occurred: ${e.message}"
@@ -52,6 +55,44 @@ public class PayerController extends BaseController {
         }
     }
 
+    def update() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            Payer updatedPayer = payerService.update(params, customer)
+
+            redirect(action: "show", id: updatedPayer.id)
+        } catch (ValidationException e) {
+            response.status = 400
+
+            def fieldErrors = e.errors.fieldErrors.collectEntries { fe ->
+                [(fe.field): message(error: fe)]
+            }
+
+            render([status: 'ERROR', errors: fieldErrors] as JSON)
+        } catch (Exception e) {
+            log.error("Erro ao atualizar cliente: ${e.message}", e)
+
+            response.status = 500
+
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
+    }
+
+    def delete() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            payerService.delete(params.long('id'), customer)
+
+            render([Status: 'SUCCESS', message: 'Cliente desativado com sucesso!'] as JSON)
+        } catch (Exception e) {
+            flash.message = "Erro ao remover cliente: ${e.message}"
+
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
+    }
+
     def list() {
         List<Payer> payerList = listPayer()
 
@@ -79,7 +120,7 @@ public class PayerController extends BaseController {
     private List<Payer> listPayer() {
         Customer customer = springSecurityService.currentUser.customer
         Map searchParams = [
-                customerId: springSecurityService.currentUser.customer.id
+            customerId: springSecurityService.currentUser.customer.id
         ]
 
         if (params.name) {
