@@ -18,7 +18,7 @@ class PaymentValidator {
 
     public static Boolean isValidDescription(String description) {
         if (description) {
-            if (!description.matches("[\\p{L}\\p{N}\\s.,'!?:;()\\-]+")) return false
+            if (!AllowedCharsUtil.hasOnlyAllowedChars(description)) return false
             if (description.length() > 255) return false
         }
 
