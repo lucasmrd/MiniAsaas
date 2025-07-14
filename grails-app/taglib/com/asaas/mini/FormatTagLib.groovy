@@ -1,7 +1,10 @@
 package com.asaas.mini
 
 import com.asaas.mini.utils.Validator
+
 import javax.swing.text.MaskFormatter
+
+import java.text.NumberFormat
 
 class FormatTagLib {
     static namespace = "formatTagLib"
@@ -35,5 +38,19 @@ class FormatTagLib {
 
         maskFormatter.setValueContainsLiteralCharacters(false)
         out << maskFormatter.valueToString(cpfCnpj)
+    }
+
+    def formatCurrency = { attrs, body ->
+        def value = attrs.value
+
+        if (value == null || !(value instanceof BigDecimal)) {
+            out << 'R$ 0,00'
+            return
+        }
+
+        def locale = new Locale("pt", "BR")
+        def currencyFormatter = NumberFormat.getCurrencyInstance(locale)
+
+        out << currencyFormatter.format(value)
     }
 }
