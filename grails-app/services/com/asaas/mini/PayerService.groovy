@@ -8,6 +8,8 @@ import com.asaas.mini.enums.CompanyType
 
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
+import org.springframework.validation.BeanPropertyBindingResult
+import org.springframework.validation.Errors
 
 @Transactional
 public class PayerService {
@@ -40,7 +42,7 @@ public class PayerService {
         return payer
     }
 
-    private Payer validatePayer(Map parsedParams) {
+    public Payer validatePayer(Map parsedParams) {
 
         Payer payer = new Payer()
 
@@ -67,19 +69,38 @@ public class PayerService {
         return payer
     }
 
+    public void validatePayerStep(Map params) {
+        if (params.long('payerId')) {
+            def payerId = params.long('payerId')
+            if (!Payer.exists(payerId)) {
+                Errors errors = new BeanPropertyBindingResult(params, 'payer')
+                errors.rejectValue('payerId',
+                        'payer.not.found',
+                        'Cliente selecionado não encontrado')
+                throw new ValidationException("Erro de validação do cliente", errors)
+            }
+        } else {
+            Map parsedParams = sanitizeParams(params)
+            Payer validatedPayer = validatePayer(parsedParams)
+
+            if (validatedPayer.hasErrors())
+                throw new ValidationException("Erro aovalidar dados do novo cliente", validatedPayer.errors)
+        }
+    }
+
     private static Map sanitizeParams(Map parseInfo) {
 
         Map sanitizedParams = [:]
         sanitizedParams.customer = parseInfo.customer
         sanitizedParams.name = parseInfo.name?.trim()
         sanitizedParams.email = parseInfo.email?.trim()
-        sanitizedParams.phone = parseInfo.phone?.trim().replaceAll("\\D", "")
-        sanitizedParams.mobilePhone = parseInfo.mobilePhone?.trim().replaceAll("\\D", "")
-        sanitizedParams.cpfCnpj = parseInfo.cpfCnpj?.trim().replaceAll("\\D", "")
+        sanitizedParams.phone = (parseInfo.phone?.trim())?.replaceAll("\\D", "")
+        sanitizedParams.mobilePhone = (parseInfo.mobilePhone?.trim())?.replaceAll("\\D", "")
+        sanitizedParams.cpfCnpj = (parseInfo.cpfCnpj?.trim())?.replaceAll("\\D", "")
         sanitizedParams.address = parseInfo.address?.trim()
         sanitizedParams.city = parseInfo.city?.trim()
         sanitizedParams.state = parseInfo.state?.trim()
-        sanitizedParams.postalCode = parseInfo.postalCode?.trim().replaceAll("\\D", "")
+        sanitizedParams.postalCode = (parseInfo.postalCode?.trim())?.replaceAll("\\D", "")
         sanitizedParams.addressNumber = parseInfo.addressNumber
         sanitizedParams.addressComplement = parseInfo.addressComplement?.trim()
 
