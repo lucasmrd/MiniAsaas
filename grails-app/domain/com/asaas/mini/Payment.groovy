@@ -28,4 +28,22 @@ class Payment extends BaseEntity {
         description nullable: true, blank: true
         paymentDate nullable: true
     }
+
+    static namedQueries = {
+        query {Map search ->
+
+            createAlias('payer', 'p')
+
+            if (search.customer) {
+                eq('customer', search.customer)
+            }
+
+            if (search.term) {
+                or {
+                    like('p.name', "%${search.term}%")
+                    like('p.email', "${search.term}")
+                }
+            }
+        }
+    }
 }
