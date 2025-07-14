@@ -5,23 +5,23 @@ import com.asaas.mini.utils.BaseController
 import com.asaas.mini.utils.Validator
 
 import grails.converters.JSON
+import grails.validation.ValidationException
 
 public class PayerController extends BaseController {
 
     def payerService
     def springSecurityService
 
-    def index() {
-        println "${springSecurityService.currentUser.customer}"
-    }
+    def index() { }
 
     def save() {
         try {
             params.customer = springSecurityService.currentUser.customer
+
             Payer payer = payerService.save(params)
+
             redirect(action: "show", id: payer.id)
         } catch (Exception e) {
-            println "Error occurred: ${e.message}"
             redirect(action: "index", params: [error: "Failed to save payer"])
         }
     }
@@ -32,6 +32,44 @@ public class PayerController extends BaseController {
         if (payer) return [payer: payer]
 
         render "Pagador não encontrado"
+    }
+
+    def update() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            Payer updatedPayer = payerService.update(params, customer)
+
+            redirect(action: "show", id: updatedPayer.id)
+        } catch (ValidationException e) {
+            response.status = 400
+
+            def fieldErrors = e.errors.fieldErrors.collectEntries { fe ->
+                [(fe.field): message(error: fe)]
+            }
+
+            render([status: 'ERROR', errors: fieldErrors] as JSON)
+        } catch (Exception e) {
+            log.error("Erro ao atualizar cliente: ${e.message}", e)
+
+            response.status = 500
+
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
+    }
+
+    def delete() {
+        try {
+            def customer = springSecurityService.currentUser.customer
+
+            payerService.delete(params.long('id'), customer)
+
+            render([Status: 'SUCCESS', message: 'Cliente desativado com sucesso!'] as JSON)
+        } catch (Exception e) {
+            flash.message = "Erro ao remover cliente: ${e.message}"
+
+            render([status: 'ERROR', message: e.message] as JSON)
+        }
     }
 
     def list() {

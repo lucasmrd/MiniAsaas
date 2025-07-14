@@ -40,6 +40,58 @@ public class PayerService {
         return payer
     }
 
+    public Payer update(Map params, Customer customer) {
+
+        Long payerId = params.long('id')
+
+        if (!payerId) {
+            throw new IllegalArgumentException("ID do pagador é obrigatório para atualização.")
+        }
+
+        Payer payer = Payer.findByIdAndCustomer(payerId, customer)
+
+        if (!payer) {
+            throw new RuntimeException("Pagador não encontrado ou não pertence ao usuário.")
+        }
+
+        Map parsedParams = sanitizeParams(params)
+        Payer validatedPayer = validatePayer(parsedParams)
+
+        if (validatedPayer.hasErrors()) {
+            throw new ValidationException("Erro ao validar payment", validatedPayer.errors)
+        }
+
+        payer.name = parsedParams.name
+        payer.cpfCnpj = parsedParams.cpfCnpj
+        payer.email = parsedParams.email
+        payer.phone = parsedParams.phone
+        payer.mobilePhone = parsedParams.mobilePhone
+        payer.postalCode = parsedParams.postalCode
+        payer.address = parsedParams.address
+        payer.addressNumber = parsedParams.addressNumber
+        payer.addressComplement = parsedParams.addressComplement
+        payer.city = parsedParams.city
+        payer.state = parsedParams.state
+        payer.markDirty('name')
+
+        return payer.save(flush: true, failOnError: true)
+    }
+
+    public void delete(Long id, Customer customer) {
+        if (!id) {
+            throw new IllegalArgumentException("ID do pagador nulo.")
+        }
+
+        Payer payer = Payer.findByIdAndCustomer(id, customer)
+
+        if(!payer) {
+            throw new RuntimeException("Pagador não encontrado.")
+        }
+
+        payer.deleted = true
+        payer.markDirty('deleted')
+    }
+
     private Payer validatePayer(Map parsedParams) {
 
         Payer payer = new Payer()
