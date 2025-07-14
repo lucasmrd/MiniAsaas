@@ -31,6 +31,7 @@ class Payment extends BaseEntity {
 
     static namedQueries = {
         query {Map search ->
+            eq('deleted', false)
 
             createAlias('payer', 'p')
 
@@ -40,8 +41,61 @@ class Payment extends BaseEntity {
 
             if (search.term) {
                 or {
-                    like('p.name', "%${search.term}%")
-                    like('p.email', "${search.term}")
+                    ilike('p.name', "%${search.term}%")
+                    ilike('p.email', "${search.term}")
+                }
+            }
+        }
+
+        confirmedPayments {Map search ->
+            eq('deleted', false)
+            eq('status', PaymentStatus.CONFIRMED)
+
+            createAlias('payer', 'p')
+
+            if (search.customer) {
+                eq('customer', search.customer)
+            }
+
+            if (search.term) {
+                or {
+                    ilike('p.name', "%${search.term}%")
+                    ilike('p.email', "${search.term}")
+                }
+            }
+        }
+
+        overduePayments {Map search ->
+            eq('deleted', false)
+            eq('status', PaymentStatus.OVERDUE)
+
+            createAlias('payer', 'p')
+
+            if (search.customer) {
+                eq('customer', search.customer)
+            }
+
+            if (search.term) {
+                or {
+                    ilike('p.name', "%${search.term}%")
+                    ilike('p.email', "${search.term}")
+                }
+            }
+        }
+
+        excludedPayments {Map search ->
+            eq('deleted', true)
+
+            createAlias('payer', 'p')
+
+            if (search.customer) {
+                eq('customer', search.customer)
+            }
+
+            if (search.term) {
+                or {
+                    ilike('p.name', "%${search.term}%")
+                    ilike('p.email', "${search.term}")
                 }
             }
         }

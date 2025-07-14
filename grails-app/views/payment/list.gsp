@@ -6,11 +6,38 @@
 </head>
 <body>
 <atlas-panel class="js-payment-list-panel">
+    <g:if test="${flash.message}">
+        <atlas-alert class="js-flash-alert" type="success" message="${flash.message}"></atlas-alert>
+    </g:if>
+    <g:if test="${flash.error}">
+        <atlas-alert class="js-flash-alert" type="danger" message="${flash.error}"></atlas-alert>
+    </g:if>
+
     <g:if test="${paymentList}">
+
+    <atlas-modal header="Deseja excluir a cobrança?" class="js-delete-modal">
+        <atlas-text class="js-modal-content"></atlas-text>
+        <atlas-button
+            class="js-cancel-button js-close-modal-button"
+            slot="actions"
+            type="outlined"
+        ></atlas-button>
+        <atlas-button class="js-confirm-button" slot="actions"></atlas-button>
+    </atlas-modal>
+    <atlas-modal header="Deseja restaurar a cobrança?" class="js-restore-modal">
+        <atlas-text class="js-modal-content"></atlas-text>
+        <atlas-button
+            class="js-cancel-button js-close-modal-button"
+            slot="actions"
+            type="outlined"
+        ></atlas-button>
+        <atlas-button class="js-confirm-button" slot="actions"></atlas-button>
+    </atlas-modal>
+
         <atlas-toolbar>
             <atlas-search-input
                 slot="search"
-                name="name"
+                name="term"
                 placeholder="Procurar por nome ou email do cliente"
             ></atlas-search-input>
             <atlas-button
@@ -21,14 +48,17 @@
             ></atlas-button>
         </atlas-toolbar>
         <atlas-easy-table
-            url="${createLink(controller:"payment", action:"loadTableContent")}"
+            class="js-payment-list-table"
+            url="${createLink(controller:"payment", action:"loadTableContent",
+                    params: params.subMap(['term', 'status', 'deleted']))}"
+            has-actions
             total-records="${paymentList.totalCount}"
             items-per-page="10"
-            columns='[{"name":"name","label":"Nome","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"value","label":"Valor","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"description","label":"Descrição","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"billingType","label":"Forma de pagamento","size":"sm","ellipsis":true,"sortable":true},
-            {"name":"dueDate","label":"Data de vencimento","size":"sm","ellipsis":true,"sortable":true}]'
+            columns='[{"name":"name","label":"Nome","size":"md","ellipsis":true,"sortable":true},
+            {"name":"value","label":"Valor","size":"md","ellipsis":true,"sortable":true},
+            {"name":"description","label":"Descrição","size":"md","ellipsis":true,"sortable":true},
+            {"name":"billingType","label":"Forma de pagamento","size":"md","ellipsis":true,"sortable":true},
+            {"name":"dueDate","label":"Data de vencimento","size":"lg","ellipsis":true,"sortable":true}]'
         >
             <atlas-empty-state
                 slot="empty-state-template"
@@ -38,7 +68,7 @@
                 description="Tente ajustar os filtros ou realizar uma nova busca."
             >
             </atlas-empty-state>
-            <g:render template="/payment/templates/list/tableContent" model="[paymentList: paymentList]" />
+            <g:render template="/payment/templates/list/tableContent" model="[paymentList: paymentList, params: params]" />
         </atlas-easy-table>
     </g:if>
     <g:else>
@@ -56,5 +86,5 @@
         </atlas-empty-state>
     </g:else>
 </atlas-panel>
-<asset:javascript src="payment/ListPaymentController.js"/>
+<asset:javascript src="payment/list/ListPaymentController.js"/>
 </body>

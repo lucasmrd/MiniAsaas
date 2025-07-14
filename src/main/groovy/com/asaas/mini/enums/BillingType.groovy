@@ -6,8 +6,7 @@ enum BillingType {
 
     BANK_SLIP,
     PIX,
-    CREDIT_CARD,
-    UNDEFINED
+    CREDIT_CARD
 
     public String getLabel() {
         return Holders.applicationContext
