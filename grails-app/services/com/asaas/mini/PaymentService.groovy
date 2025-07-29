@@ -57,6 +57,108 @@ class PaymentService {
         return payment
     }
 
+    public Payment update(Map params, Customer customer) {
+        Long paymentId = params.long('id')
+
+        if (!paymentId) {
+            throw new IllegalArgumentException("ID da cobrança é obrigatório para atualização.")
+        }
+
+        Payment payment = Payment.findByIdAndCustomer(paymentId, customer)
+
+        if (!payment) {
+            throw new RuntimeException("Cobrança não encontrada ou não pertence ao cliente.")
+        }
+
+        Map parsedParams = sanitizeParams(params)
+        Payment validatedPayment = validatePayment(parsedParams)
+
+        if (validatedPayment.hasErrors()) {
+            throw new ValidationException("Erro ao validar payment", validatedPayment.errors)
+        }
+
+        payment.payer = parsedParams.payer
+        payment.billingType = parsedParams.billingType
+        payment.value = parsedParams.value
+        payment.description = parsedParams.description
+        payment.dueDate = parsedParams.dueDate
+
+        if (!DateUtil.isDateBeforeToday(payment.dueDate)) {
+            payment.status = PaymentStatus.PENDING
+        }
+
+        return payment.save(flush: true, failOnError: true)
+    }
+
+    public List<Payment> list(Map criteria) {
+        def queryParams = [
+                max: criteria.int('max'),
+                offset: criteria.int('offset'),
+                sort: criteria.sort ?: 'dueDate',
+                order: criteria.order ?: 'desc'
+        ]
+
+        def statusEnum = PaymentStatus.convert(criteria.status)
+
+        if (statusEnum == PaymentStatus.CONFIRMED) {
+            return Payment.confirmedPayments(criteria).list(queryParams)
+        }
+
+        if (statusEnum == PaymentStatus.OVERDUE) {
+            return Payment.overduePayments(criteria).list(queryParams)
+        }
+
+        if (criteria.boolean('deleted')) {
+            return Payment.excludedPayments(criteria).list(queryParams)
+        } else {
+            return Payment.query(criteria).list(queryParams)
+        }
+    }
+
+    public void delete(Long id, Customer customer) {
+        if (!id) {
+            throw new IllegalArgumentException("ID da cobrança nulo.")
+        }
+
+        Payment payment = Payment.findByIdAndCustomer(id, customer)
+
+        if (!payment) {
+            throw new RuntimeException("Cobrança não encontrada!")
+        }
+
+        payment.deleted = true
+        payment.markDirty('deleted')
+    }
+
+    public void restore(Long id, Customer customer) {
+        if (!id) {
+            throw new IllegalArgumentException("ID da cobrança nulo.")
+        }
+
+        Payment payment = Payment.findByIdAndCustomer(id, customer)
+
+        if (!payment) {
+            throw new RuntimeException("Cobrança não encontrada!")
+        }
+
+        payment.deleted = false
+        payment.markDirty('deleted')
+    }
+
+    public void confirm(Long id, Customer customer) {
+        if (!id) {
+            throw new IllegalArgumentException("ID da cobrança nulo.")
+        }
+
+        Payment payment = Payment.findByIdAndCustomer(id, customer)
+
+        if (!payment) {
+            throw new RuntimeException("Cobrança não encontrada!")
+        }
+
+        payment.status = PaymentStatus.CONFIRMED
+    }
+
     private Payment validatePayment(Map parsedParams) {
         Payment payment = new Payment()
 
@@ -84,7 +186,15 @@ class PaymentService {
 
         if (parseInfo.customer) sanitizedParams.customer = parseInfo.customer
 
-        if (parseInfo.payer) sanitizedParams.payer = parseInfo.payer
+        if (parseInfo.payerId) {
+            try {
+                Long id = parseInfo.long('payerId')
+                if (id) sanitizedParams.payer = Payer.get(id)
+            } catch (NumberFormatException e) {
+                sanitizedParams.payer = null
+            }
+        }
+        else if (parseInfo.payer) sanitizedParams.payer = parseInfo.payer
 
         def rawValue = parseInfo?.value
         sanitizedParams.value = rawValue ? rawValue.replace(',', '.').toBigDecimal() : null

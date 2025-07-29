@@ -26,8 +26,26 @@
             <atlas-sidebar-menu-item
                 icon="files"
                 value="list-payment"
-                text="Minhas cobranças"
+                text="Todas"
                 href="${createLink(controller: "payment", action: "list")}"
+            ></atlas-sidebar-menu-item>
+            <atlas-sidebar-menu-item
+                icon="file-check"
+                value="list-payment"
+                text="Pagas"
+                href="${createLink(controller: "payment", action: "list", params: [status: 'CONFIRMED'])}"
+            ></atlas-sidebar-menu-item>
+            <atlas-sidebar-menu-item
+                icon="clock"
+                value="list-payment"
+                text="Vencidas"
+                href="${createLink(controller: "payment", action: "list", params: [status: 'OVERDUE'])}"
+            ></atlas-sidebar-menu-item>
+            <atlas-sidebar-menu-item
+                icon="trash"
+                value="list-payment"
+                text="Excluídas"
+                href="${createLink(controller: "payment", action: "list", params: [deleted: true])}"
             ></atlas-sidebar-menu-item>
         </atlas-sidebar-menu-item>
     </atlas-sidebar-menu>

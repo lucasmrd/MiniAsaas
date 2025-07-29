@@ -66,6 +66,10 @@ grails:
                     className: 'com.asaas.mini.Role'
                 userRole:
                     className: 'com.asaas.mini.UserRole'
+---
+quartz:
+    autoStartup: true
+    waitForJobsToCompleteOnShutdown: true
 
 ---
 grails:
